@@ -3,7 +3,7 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.ORMData.Database
 {
-    public class DBContexts : DbContext
+    public class PizzaBoxDBContext : DbContext
     {
         //Create table for stores.
         public DbSet<Store> Stores { get; set; }
@@ -36,13 +36,16 @@ namespace PizzaBox.ORMData.Database
             builder.Entity<Store>().HasKey( store => store.Id);
             builder.Entity<PizzaOrder>().HasKey(p => new { p.Id, p.OrderId});
             builder.Entity<PizzaStore>().HasKey(s => new { s.StoreId, s.Id});
+            builder.Entity<PizzaSize>().HasKey(s => new { s.SizeId, s.Id });
 
             //Navigational Relationships.
             builder.Entity<Order>().HasMany(po => po.PizzaOrders).WithOne(o => o.Order).HasForeignKey(o => o.OrderId);
+           
             builder.Entity<Size>().HasMany(sp => sp.PizzaSizes).WithOne(s => s.Size).HasForeignKey(s => s.SizeId);
-            builder.Entity<Pizza>().HasMany(ps => ps.PizzaSizes).WithOne(p => p.Pizza).HasForeignKey(p => p.PizzaId);
+            builder.Entity<Pizza>().HasMany(ps => ps.PizzaSizes).WithOne(p => p.Pizza).HasForeignKey(p => p.Id);
             //read as Pizza entity has many Pizzaorders relating with one pizza with PizzaId as a foreign key in PizzaOrders
             builder.Entity<Pizza>().HasMany(po => po.PizzaOrders).WithOne(p => p.Pizza).HasForeignKey(p => p.Id); 
+            
             builder.Entity<Store>().HasMany(sp => sp.PizzaStore).WithOne(s => s.Store).HasForeignKey(s => s.StoreId);
             builder.Entity<Pizza>().HasMany(ps => ps.PizzaStores).WithOne(p => p.pizza).HasForeignKey(p => p.Id);
 
@@ -86,18 +89,18 @@ namespace PizzaBox.ORMData.Database
 
             builder.Entity<PizzaSize>().HasData(new PizzaSize[]
             {
-                new PizzaSize(){PizzaId = 1, SizeId = 1},
-                new PizzaSize(){PizzaId = 1, SizeId = 2},
-                new PizzaSize(){PizzaId = 1, SizeId = 3},
-                new PizzaSize(){PizzaId = 2, SizeId = 1},
-                new PizzaSize(){PizzaId = 2, SizeId = 2},
-                new PizzaSize(){PizzaId = 2, SizeId = 3},
-                new PizzaSize(){PizzaId = 3, SizeId = 1},
-                new PizzaSize(){PizzaId = 3, SizeId = 2},
-                new PizzaSize(){PizzaId = 3, SizeId = 3},
-                new PizzaSize(){PizzaId = 4, SizeId = 1},
-                new PizzaSize(){PizzaId = 4, SizeId = 2},
-                new PizzaSize(){PizzaId = 4, SizeId = 3},
+                new PizzaSize(){Id = 1, SizeId = 1},
+                new PizzaSize(){Id = 1, SizeId = 2},
+                new PizzaSize(){Id = 1, SizeId = 3},
+                new PizzaSize(){Id = 2, SizeId = 1},
+                new PizzaSize(){Id = 2, SizeId = 2},
+                new PizzaSize(){Id = 2, SizeId = 3},
+                new PizzaSize(){Id = 3, SizeId = 1},
+                new PizzaSize(){Id = 3, SizeId = 2},
+                new PizzaSize(){Id = 3, SizeId = 3},
+                new PizzaSize(){Id = 4, SizeId = 1},
+                new PizzaSize(){Id = 4, SizeId = 2},
+                new PizzaSize(){Id = 4, SizeId = 3},
             });
 
             builder.Entity<Size>().HasData(new Size[]
@@ -106,6 +109,6 @@ namespace PizzaBox.ORMData.Database
                 new Size(){Id = 2, Name = "Medium", Price = 10.50M},
                 new Size(){Id = 3, Name = "Small", Price = 8.25M}
             });
-         }
+          }
         }
     }

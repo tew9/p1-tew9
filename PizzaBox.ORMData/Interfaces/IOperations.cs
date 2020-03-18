@@ -9,7 +9,7 @@ namespace PizzaBox.ORMData.Interfaces
     public interface IOperations<T>
     {
         List<T> Get();
-        bool Update(T t);   
+        bool Post(T t);   
 
     }
 }
