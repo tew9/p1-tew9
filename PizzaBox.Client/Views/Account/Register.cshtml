@@ -1,3 +1,5 @@
+@model PizzaBox.Client.Models.NewAccountModel
+
 <div class="wrapper fadeInDown">
   <div id="formContent">
     <!-- Tabs Titles -->
@@ -19,14 +21,14 @@
     <!-- Login Form -->
     <form action="account/Login" method="POST">
       <input type="text" id="register" class="fadeIn second" 
-        name="FirstName" minlength="3" maxlength="40" placeholder="FirstName" required>
+        asp-for="@Model.FirstName" minlength="3" maxlength="40" placeholder="FirstName" required/>
       <input type="text" id="register" class="fadeIn second" 
-        name="LastName" minlength="3" maxlength="40"placeholder="LastName" required>
-      <input type="text" id="register" class="fadeIn second" name="UserName" required size="45"
+        asp-for="LastName" minlength="3" maxlength="40"placeholder="LastName" required>
+      <input type="text" id="register" class="fadeIn second" asp-for="@Model.UserName" required size="45"
         pattern="[a-z]{4,8}" title="4 to 8 lowercase letters" placeholder="UserName">
-      <input type="email" id="register" class="fadeIn second" name="Email" placeholder="Email" required>
+      <input type="email" id="register" class="fadeIn second" asp-for="@Model.Email" placeholder="Email" required>
       <input type="password" id="password" class="fadeIn third" 
-        name="login" placeholder="password"  required>
+        asp-for="Password" placeholder="password"  required>
       <input type="submit" class="fadeIn fourth" value="Register">
     </form>
 

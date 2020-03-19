@@ -22,37 +22,40 @@ namespace PizzaBox.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserLoginModel userinfo)
+        public IActionResult Login(UserLoginModel account)
         {
-            if(ModelState.IsValid)
+            if(!ModelState.IsValid)
             {
-                if(userinfo.Login(userinfo))
-                {   
-                    string dbtype = userinfo.GetUserInfo(userinfo.UserName).type;
+                return View(account);
+            }
+            if(account.Login(account))
+            {   
+                string dbtype = account.GetUserInfo(account.UserName).type;
 
-                    if(userinfo.Type == "user" && userinfo.Type.Equals(dbtype))
-                    {
-                        return RedirectToAction("Choose", "Pizza");
-                    }
-                    else if(userinfo.Type == "store" && userinfo.Type.Equals(dbtype))
-                    {
-                        return RedirectToAction("Stores", userinfo);
-                    }
-                    else
-                    {
-                        ViewData["Error"] = "You're a "+dbtype+ ", you can't login as \n"+userinfo.Type
-                        +" Please choose the right user type";
-                        return View(userinfo);
-                    }
-                }
-                else
+                if(dbtype == "user")
                 {
-                    ViewData["Error"] = "Wrong Username or Password";
-                    return View(userinfo);
-                } 
+                    return View("User", account);
+                }
+                
+                return View("Store");
+                
+                // else
+                // {
+                //     ViewData["Error"] = "You're a "+dbtype+ ", you can't login as \n"+account.Type
+                //     +" Please choose the right user type";
+                //     return View(account);
+                // }
+            }
+            else
+            {
+                ViewData["Error"] = "Wrong Username or Password";
+                return View(account);
             }  
-    
-             return View(); 
+        }
+
+        public IActionResult Logout()
+        {
+            return  View();
         }
 
         public IActionResult Stores()

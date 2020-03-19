@@ -6,7 +6,7 @@ namespace PizzaBox.Client.Controllers
   public class PizzaController : Controller
   {
     [HttpGet]
-    public IActionResult Choose()
+    public IActionResult Order()
     { 
       // ViewData["pizza"] =pm.Pizz();
       PizzaViewModel pm = new PizzaViewModel();
@@ -15,7 +15,7 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpPost]
-    public IActionResult Choose(PizzaViewModel model)
+    public IActionResult Order(PizzaViewModel model)
     {
       if(model != null){
         ViewData["pizza"] = model;

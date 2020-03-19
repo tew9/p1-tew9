@@ -13,16 +13,8 @@
     <!-- Login Form -->
     <form action="/account/login" method="POST">
       <input type="text" id="username" class="fadeIn second" asp-for="@Model.UserName" placeholder="username" required>
-      <input type="password" id="password" class="fadeIn third" name="Password" placeholder="password" required>
-      <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px">
-        <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "user", new {name="Type"}) User
-        </label>
-
-        <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
-        </label>
-      </div><br>
+      <input type="password" id="password" class="fadeIn third" asp-for="@Model.Password" placeholder="password" required>
+     
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 

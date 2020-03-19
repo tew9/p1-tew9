@@ -5,8 +5,8 @@
   {
     @foreach(var p in @Model.Pizzas)
     {
-      <form action="/pizza/choo se" method = "post">
-      <div class="col-md-4">
+      <form action="/pizza/order" method = "post">
+      <div class="formContent">
         <span class ="form-control" name="@Model.SelectedPizza" value="@p.Name">@p.Name </span>
         <select name="Sizes"  class="custom-select">
           @foreach (var size in @Model.Sizes)
@@ -17,10 +17,10 @@
         </select>
         @*Give quantity and return back the selected values*@
           Quantity: <input type="number" asp-for="@Model.Quantity"/>
-          <button class = "btn-success" type="submit" value="Order">Add To Cart</button>
+          <button class = "btn btn float-right btn-primary" type="submit" value="Order">Add To Cart</button>
       </div>
       
-    </form>
+    </form> <br><br>
     }
    
   }

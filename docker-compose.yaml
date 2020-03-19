@@ -1,0 +1,27 @@
+
+version: "3.7"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: dockerfile
+    networks:
+      - skynet
+    ports:
+      - 8000:80
+    environment:
+      ConnectionStrings__main: "server=sql;database=PizzaBoxDb;user id=sa;password=Password12345"
+
+  sql:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Password12345
+    networks:
+      - skynet
+    ports:
+      - 1433:1433
+
+networks:
+  skynet:

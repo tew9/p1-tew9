@@ -1,0 +1,32 @@
+@model PizzaBox.Client.Models.UserLoginModel
+
+
+<div class="jumbotron">
+  <a href="/account/logout">logout</a>
+  <h1 class="display-4">Welcome @Model.UserName</h1>
+  <p class="lead">Choose the store you want to order from?</p>
+  <hr class="my-4">
+  
+  <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px">
+        @* <label class="btn btn-primary">
+            @Html.RadioButtonFor(model => model.Type, "user", new {name="Type"}) User
+        </label>
+
+        <label class="btn btn-primary">
+            @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
+        </label> *@
+        
+        <a href="order/history"></a>
+        <a href="order/create"></a>
+        <form action="/pizza/order" method="GET">
+        @Html.HiddenFor(u => u.UserName);
+         <button type="submit"></button>s
+  </form>
+    </div><br>
+
+    <form action="/user/history" method="GET">
+      @Html.HiddenFor(u => u.UserName);
+      <button type="submit"></button>
+    </form>
+    
+</div>

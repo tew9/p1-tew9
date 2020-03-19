@@ -1,0 +1,10 @@
+# # exclude all
+# *
+
+# # include only
+# !PizzaBox.Client/Controllers
+
+# dotnetP
+**.vscode
+**/bin
+**/obj

@@ -1,0 +1,17 @@
+<div class="jumbotron">
+    <a href="/account/logout">logout</a>
+  <h1 class="display-4">Welcome @ViewData["store"]</h1>
+  <p class="lead">Welcome To Store</p>
+  <hr class="my-4">
+  @* <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px"> *@
+        @* <label class="btn btn-primary">
+            @Html.RadioButtonFor(model => model.Type, "user", new {name="Type"}) User
+        </label>
+
+        <label class="btn btn-primary">
+            @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
+        </label> *@
+        <a href="order/history">Order history</a>
+        <a href="order/history">Inventory</a>
+    @* </div><br> *@
+</div>

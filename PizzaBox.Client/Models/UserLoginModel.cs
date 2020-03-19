@@ -19,7 +19,10 @@ namespace PizzaBox.Client.Models
         [Required(ErrorMessage = "Pleas fill in the username")]
         public string Password { get; set; }
 
-        public string Type { get; set;}
+        // [Required(ErrorMessage = "Please choose if you are user or store manager")]
+        // public string Type { get; set;}
+
+        public int Id { get; set; }
 
         //check if Login is successful.
         public bool Login(UserLoginModel  userinfo)

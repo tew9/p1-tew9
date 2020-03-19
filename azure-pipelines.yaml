@@ -1,0 +1,46 @@
+name: $(date:yyyyMMdd)$(rev:.rr)
+
+pr:
+  - master
+
+stages:
+  - stage: build
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: dotnet build
+            workingDirectory: $(System.DefaultWorkingDirectory)/p1-tew9
+
+  - stage: test
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: dotnet test --collect:"XPlat Code Coverage"
+            workingDirectory: ./p1-tew9
+
+  - stage: pack
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: |
+              docker login
+              docker image build -f dockerfile -t tangotew/p1-proj .
+              docker image push tangotew/p1-proj
+              docker logout
+            workingDirectory: ./p1-tew9
+trigger:
+  - master
+
+    # © 2020 GitHub, Inc.
+    # Terms
+    # Privacy
+    # Security
+    # Status
+    # Help
+
