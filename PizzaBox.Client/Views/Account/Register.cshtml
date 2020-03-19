@@ -1,0 +1,39 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <i class='fas fa-user '  id="icon" style='font-size:48px;color:blue'></i>
+       <div class="dropdown">
+        <ul class="dropbtn" name="dropdown">User/Store
+        <div class="dropdown-content">
+          <li><a href="#">Store Admin</a></li>
+          <li><a asp-controller="Account" asp-action="Register">User</a></li>
+        </div>
+        </ul>
+    </div> 
+      
+      
+
+    <!-- Login Form -->
+    <form action="account/Login" method="POST">
+      <input type="text" id="register" class="fadeIn second" 
+        name="FirstName" minlength="3" maxlength="40" placeholder="FirstName" required>
+      <input type="text" id="register" class="fadeIn second" 
+        name="LastName" minlength="3" maxlength="40"placeholder="LastName" required>
+      <input type="text" id="register" class="fadeIn second" name="UserName" required size="45"
+        pattern="[a-z]{4,8}" title="4 to 8 lowercase letters" placeholder="UserName">
+      <input type="email" id="register" class="fadeIn second" name="Email" placeholder="Email" required>
+      <input type="password" id="password" class="fadeIn third" 
+        name="login" placeholder="password"  required>
+      <input type="submit" class="fadeIn fourth" value="Register">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" asp-controller="Account" asp-action="Login">Log in</a>
+    </div>
+
+  </div>
+</div>

@@ -16,18 +16,15 @@ namespace PizzaBox.Client.Models
     //Returning properties after user's choice
     public Pizza SelectedPizza { get; set; }
     public Size SelectedSize { get; set; }
-
-    public int SelectedQnty { get; set; }
+    // public int SelectedQnty { get; set; }
      
-    public PizzaViewModel(long id)
+    public PizzaViewModel()
     {
-      Pizzas = _ps.GetPizza(1); //Get List of Pizza associated with the store id.
+      
+      //Get List of Pizza associated with the store id.
+      Pizzas = _ps.GetPizza(1); 
+      
       Sizes = _ps.GetSize();
-    }
-
-    public List<Pizza> Pizz()
-    {
-      return _ps.GetPizza(1);
     }
   }
 }

@@ -14,16 +14,9 @@ namespace PizzaBox.ORMData.Repositories
         #region Read All Stores
         public List<Store>  Get()
         {
-            return _db.Stores.ToList();
+            return _db.Stores.Include(ps =>ps.PizzaStore).ToList();
         }
         #endregion
-
-        public List<Store>  GetStorePizzas(long id)
-        {
-            var store = _db.Stores.SingleOrDefault(s => s.Id == id);
-            return _db.Stores.Include(s => s.PizzaStore).Where(s => s.Id == store.Id).ToList(); //select from store where id = id
-                                                                                                //join Pizzastore as p on p.Id = store.Id
-        }
 
         #region Read one Store
         public Store  Get(long id)
