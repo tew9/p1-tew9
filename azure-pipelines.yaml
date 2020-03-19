@@ -11,7 +11,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet build
-            workingDirectory: ./p1-tew9
+            # workingDirectory: ./p1-tew9
 
   - stage: test
     jobs:
@@ -35,7 +35,7 @@ stages:
               docker logout
             workingDirectory: ./p1-tew9
 trigger:
-  - master
+  - frontend
 
     # © 2020 GitHub, Inc.
     # Terms
