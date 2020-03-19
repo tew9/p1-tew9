@@ -1,0 +1,30 @@
+@model PizzaBox.Client.Models.PizzaViewModel
+@using PizzaBox.Domain.Models
+
+<form action="/pizza/choose" method = "post">
+  @foreach(var p in @Model.Pizzas)
+  {
+    <input type="checkbox" name="@Model.SelectedPizza" value="@p.Name"/> @*Get the pizzaname and return the selected pizza*@
+
+    <select asp-for="@Model.Sizes"> @*Gives Size dropdown and return selected size*@
+      @foreach (var size in @Model.Sizes)
+      {
+        <option value="@size">@size.Name  $@size.Price</option>
+      }
+    </select>
+
+    @*Give quantity and return back the selected values*@
+    <input type="number" asp-for="@Model.SelectedQnty" value="@Model.Quantity"/>
+  }
+  <p> 
+    @{
+    List<Pizza> lp = (List<Pizza>)@ViewData["pizza"];
+      foreach (var item in lp)
+      {
+          <div>dsfdsf @item.Name</div>
+      }
+    }
+  </p>
+
+  <button type="submit" value="Order">Add To Cart</button>
+</form>

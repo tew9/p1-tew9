@@ -30,9 +30,9 @@ namespace PizzaBox.ORMData.Repositories
     }
     #endregion
 
-    public List<Pizza> GetPizzaInfo(long pizzaId)
-    {
-        return _pr.Get(pizzaId);
-    }
+    // public List<Pizza> GetPizzaInfo(long pizzaId)
+    // {
+    //     return _pr.Get(pizzaId);
+    // }
   }
 }
