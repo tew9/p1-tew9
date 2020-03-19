@@ -35,7 +35,7 @@ stages:
               docker logout
             workingDirectory: ./p1-tew9
 trigger:
-  - master
+  - frontend
 
     # © 2020 GitHub, Inc.
     # Terms
