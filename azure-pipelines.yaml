@@ -11,7 +11,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet build
-            workingDirectory: $(System.DefaultWorkingDirectory)/p1-tew9
+            workingDirectory: ./p1-tew9
 
   - stage: test
     jobs:
