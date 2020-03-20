@@ -110,5 +110,7 @@ namespace PizzaBox.ORMData.Database
                 new Size(){Id = 3, Name = "Small", Price = 8.25M}
             });
           }
+            
+
         }
     }

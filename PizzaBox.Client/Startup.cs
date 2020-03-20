@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PizzaBox.ORMData.Database;
 using PizzaBox.ORMData.Repositories;
 
 namespace PizzaBox.Client
@@ -25,6 +26,7 @@ namespace PizzaBox.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //services.AddDbContext<PizzaBoxDBContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("main")));
             services.AddScoped<UserRepository>();
         }
 

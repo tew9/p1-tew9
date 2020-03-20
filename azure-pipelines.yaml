@@ -33,10 +33,14 @@ stages:
               docker image build -f dockerfile -t tangotew/p1-proj .
               docker image push tangotew/p1-proj
               docker logout
+            env:
+              DOCKER_IMAGE: $(image_name)
             # workingDirectory: ./p1-tew9
 trigger:
   - frontend
 
+variable:
+  - image_name: tangotew/p1-proj
     # © 2020 GitHub, Inc.
     # Terms
     # Privacy

@@ -8,7 +8,7 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult ChooseStore()
     { 
-      // ViewData["pizza"] =pm.Pizz();
+      
       return View();
     }
 

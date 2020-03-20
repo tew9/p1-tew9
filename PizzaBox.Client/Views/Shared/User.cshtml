@@ -4,24 +4,20 @@
   <a class = "btn btn-float-right" href="/account/logout">logout</a>
   <h1 class="display-4">Welcome @Model.UserName</h1>
   <p class="lead">Choose the store you want to order from?</p>
-  <hr class="my-4">
-  
-  <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px">
-        @* @foreach(var store in @Model.stores)
-        <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "user", new {name="Type"}) User
-        </label>
+  <hr class="my-3">
+  </div>
 
+  <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px">
+    @foreach(var store in @Model.Stores)
+    {
         <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
-        </label> *@ 
-        
-        <a href="order/history">Order History</a>
-        
-        
-  @* </form> *@
-    </div><br>
-    @* <form action="/pizza/order" method="POST"> *@
-      @Html.ActionLink("Make Selection", "order", "pizza", new { UserName = @Model.UserName, UserId = @Model.userId }, null);
-    @* </form> *@
-</div>
+            @Html.RadioButtonFor(model => model.Type, "@store.Name", new {name="Type"}) @store.Name
+        </label>
+    }
+  @* <label class="btn btn-primary">
+      @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
+  </label> *  *@
+  </div> 
+  <a href="/pizza/order">Order History</a>
+      @Html.ActionLink("Make Selection", "order", "pizza", new {store = @Model.Stores}, null);
+   

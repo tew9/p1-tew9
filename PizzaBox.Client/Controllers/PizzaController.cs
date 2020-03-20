@@ -1,16 +1,23 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
+using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Client.Controllers
 {
   public class PizzaController : Controller
   {
     [HttpGet]
-    public IActionResult Order(string UserName, string userId)
+    public IActionResult Order(List<Store> store)
     { 
       // ViewData["pizza"] =pm.Pizz();
+      string name = "";
       PizzaViewModel pm = new PizzaViewModel();
-      ViewData["user"] = UserName;
+      foreach(var s in store){
+        name = s.Name;
+      }
+      ViewData["user"] = name;
+      
       return View(pm);
     }
 

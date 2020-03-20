@@ -45,7 +45,7 @@ namespace PizzaBox.Client.Controllers
                 {
                     return View("User", account);
                 }
-
+                         
                 return View("Store", account);
             }
             else
@@ -55,7 +55,6 @@ namespace PizzaBox.Client.Controllers
             }  
         }
 
-        [HttpGet]
         public IActionResult Logout()
         {
             return  View();

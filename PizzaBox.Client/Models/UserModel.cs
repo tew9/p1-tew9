@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using PizzaBox.ORMData.Repositories;
 using PizzaBox.Domain.Models;
+using System.Collections.Generic;
 
 namespace PizzaBox.Client.Models 
 {
@@ -11,16 +12,19 @@ namespace PizzaBox.Client.Models
         Check: method that'll check if the user's information are matched the db.
         params: un is username, pw is the password.
         */
-        // private static readonly UserRepository _ur = new UserRepository();
+        private static readonly StoreRepository _sr = new StoreRepository();
+
 
         [Required(ErrorMessage = "Pleas fill in the username")]
         public string UserName { get; set;}
 
         [Required(ErrorMessage = "Pleas fill in the username")]
         public string Password { get; set; }
-        public int userId { get; set; }
 
-        public long storeId { get; set; }
+        public string Type { get; set; }
+        public int UserId { get; set; }
+
+        public List<Store> Stores { get; set; }
 
         //check if Login is successful.
         public bool Login(string password, User dbuserinfo)
@@ -41,6 +45,11 @@ namespace PizzaBox.Client.Models
             {
                 return false;
             } 
+        }
+
+        public UserModel()
+        {
+            Stores = _sr.Get();
         }
     }
 }
