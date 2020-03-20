@@ -10,8 +10,7 @@ namespace PizzaBox.Client.Controllers
     public class AccountController : Controller
     {
         //creating account object.
-        private static readonly UserLoginModel userInfo = new UserLoginModel();
-        private UserRepository _ur;
+        private UserRepository _ur; 
 
         public AccountController(UserRepository user_repo)
         {
@@ -30,7 +29,7 @@ namespace PizzaBox.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserLoginModel account)
+        public IActionResult Login(UserModel account)
         {
             User dbuser = _ur.Get(account.UserName);
 
@@ -40,21 +39,14 @@ namespace PizzaBox.Client.Controllers
             }
             if(account.Login(account.Password, dbuser))
             {   
-                string dbtype = dbuser.type;
+                string usertype = dbuser.type;
                 
-                if(dbtype == "user")
+                if(usertype == "user")
                 {
                     return View("User", account);
                 }
-                
-                return View("Store");
-                
-                // else
-                // {
-                //     ViewData["Error"] = "You're a "+dbtype+ ", you can't login as \n"+account.Type
-                //     +" Please choose the right user type";
-                //     return View(account);
-                // }
+
+                return View("Store", account);
             }
             else
             {
@@ -63,14 +55,10 @@ namespace PizzaBox.Client.Controllers
             }  
         }
 
+        [HttpGet]
         public IActionResult Logout()
         {
             return  View();
-        }
-
-        public IActionResult Stores()
-        {
-            return View();
         }
     }
 }

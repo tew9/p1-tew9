@@ -6,11 +6,11 @@ namespace PizzaBox.Client.Controllers
   public class PizzaController : Controller
   {
     [HttpGet]
-    public IActionResult Order()
+    public IActionResult Order(string UserName, string userId)
     { 
       // ViewData["pizza"] =pm.Pizz();
       PizzaViewModel pm = new PizzaViewModel();
-      ViewData["user"] = SesstionVariables.UserId;
+      ViewData["user"] = UserName;
       return View(pm);
     }
 

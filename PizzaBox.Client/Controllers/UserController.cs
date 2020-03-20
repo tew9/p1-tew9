@@ -6,18 +6,18 @@ namespace PizzaBox.Client.Controllers
   public class UserController : Controller
   {
     [HttpGet]
-    public IActionResult Order()
+    public IActionResult ChooseStore()
     { 
       // ViewData["pizza"] =pm.Pizz();
       return View();
     }
 
-    public IActionResult History(int Id)
+    [HttpPost]
+    public IActionResult ChooseStore(int Id)
     { 
       // ViewData["pizza"] =pm.Pizz();
       return View("User", Id);
     }
 
-   
   }
 }

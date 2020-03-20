@@ -4,7 +4,7 @@ using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Client.Models 
 {
-    public class UserLoginModel
+    public class UserModel
     {
         /*
         Login Model: will create the user input and output properties tighted to Login view
@@ -18,11 +18,9 @@ namespace PizzaBox.Client.Models
 
         [Required(ErrorMessage = "Pleas fill in the username")]
         public string Password { get; set; }
+        public int userId { get; set; }
 
-        // [Required(ErrorMessage = "Please choose if you are user or store manager")]
-        // public string Type { get; set;}
-
-        public int Id { get; set; }
+        public long storeId { get; set; }
 
         //check if Login is successful.
         public bool Login(string password, User dbuserinfo)
@@ -32,8 +30,6 @@ namespace PizzaBox.Client.Models
             {
                 if(dbuserinfo.password.Equals(pass)) //check if password is correct
                 {
-                    // SesstionVariables.UserId = dbUserInfo.Id;
-                    // SesstionVariables.LogFlag = true;
                     return true;
                 }
                 else 
@@ -46,10 +42,5 @@ namespace PizzaBox.Client.Models
                 return false;
             } 
         }
-        
-        // public User GetUserInfo(string username)
-        // {
-        //     return _ur.Get(username);
-        // }
     }
 }
