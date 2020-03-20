@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PizzaBox.Client.Models;
+using PizzaBox.Domain.Models;
+using PizzaBox.ORMData.Repositories;
 
 namespace PizzaBox.Client.Controllers
 {
@@ -9,6 +11,12 @@ namespace PizzaBox.Client.Controllers
     {
         //creating account object.
         private static readonly UserLoginModel userInfo = new UserLoginModel();
+        private UserRepository _ur;
+
+        public AccountController(UserRepository user_repo)
+        {
+            _ur = user_repo;
+        }
 
         [HttpGet]
         public IActionResult Login()
@@ -24,14 +32,16 @@ namespace PizzaBox.Client.Controllers
         [HttpPost]
         public IActionResult Login(UserLoginModel account)
         {
+            User dbuser = _ur.Get(account.UserName);
+
             if(!ModelState.IsValid)
             {
                 return View(account);
             }
-            if(account.Login(account))
+            if(account.Login(account.Password, dbuser))
             {   
-                string dbtype = account.GetUserInfo(account.UserName).type;
-
+                string dbtype = dbuser.type;
+                
                 if(dbtype == "user")
                 {
                     return View("User", account);
