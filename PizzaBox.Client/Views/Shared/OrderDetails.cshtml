@@ -1,0 +1,40 @@
+@model List<PizzaViewModel>
+
+<div class="container subpage">
+  
+  <div class="title">
+    <p>Detail of the Order</p>
+  </div>
+  <table class="table">
+    <thead class = "table-dark">
+      <tr>
+        <th scope="col">No:</th>
+        <th scope="col">Pizza Name</th>
+        <th scope="col">Pizza Size</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Cost</th>
+      </tr>
+    </thead>
+    <tbody>
+      @{
+        decimal totprice = 0;
+      }
+      @foreach(var order in @Model)
+      {
+        decimal price = order.Price * order.Quantity;
+        <tr>
+          <th scope="row">1</th>
+          <td>@order.SelectedPizza</td>
+          <td>@order.SelectedSize</td>
+          <td>@order.Quantity</td>
+          <td>@price</td>
+        </tr>
+      }
+      <tr>
+        <th scope="col-group">Total Cost</th>
+        <td></td>
+      </tr>
+      <button></button>
+    </tbody>
+  </table>
+</div>

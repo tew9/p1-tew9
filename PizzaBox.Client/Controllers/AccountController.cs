@@ -10,7 +10,7 @@ namespace PizzaBox.Client.Controllers
     public class AccountController : Controller
     {
         //creating account object.
-        private UserRepository _ur; 
+        private readonly UserRepository _ur; 
 
         public AccountController(UserRepository user_repo)
         {
@@ -20,7 +20,7 @@ namespace PizzaBox.Client.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View(new UserModel());
         }
         [HttpGet]
         public IActionResult Register()
@@ -32,7 +32,7 @@ namespace PizzaBox.Client.Controllers
         public IActionResult Login(UserModel account)
         {
             User dbuser = _ur.Get(account.UserName);
-
+            
             if(!ModelState.IsValid)
             {
                 return View(account);

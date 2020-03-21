@@ -21,7 +21,7 @@ namespace PizzaBox.Client.Models
         [Required(ErrorMessage = "Pleas fill in the username")]
         public string Password { get; set; }
 
-        public string Type { get; set; }
+        public string Store { get; set; }
         public int UserId { get; set; }
 
         public List<Store> Stores { get; set; }

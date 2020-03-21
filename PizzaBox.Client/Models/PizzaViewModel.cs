@@ -14,8 +14,10 @@ namespace PizzaBox.Client.Models
     public int Quantity { get; set; }
 
     //Returning properties after user's choice
-    public Pizza SelectedPizza { get; set; }
-    public Size SelectedSize { get; set; }
+    public string SelectedPizza { get; set; }
+    public string SelectedSize { get; set; }
+
+    public decimal Price { get; set; }
     // public int SelectedQnty { get; set; }
      
     public PizzaViewModel()

@@ -7,16 +7,18 @@ namespace PizzaBox.Client.Controllers
 {
   public class PizzaController : Controller
   {
+
+    private static List<PizzaViewModel> selection = new List<PizzaViewModel>();
     [HttpGet]
-    public IActionResult Order(List<Store> store)
+    public IActionResult Order(string store)
     { 
       // ViewData["pizza"] =pm.Pizz();
-      string name = "";
+     // string name = "";
       PizzaViewModel pm = new PizzaViewModel();
-      foreach(var s in store){
-        name = s.Name;
-      }
-      ViewData["user"] = name;
+      // foreach(var s in store){
+      //   name = s.Name;
+      // }
+      ViewData["pizza"] = store;
       
       return View(pm);
     }
@@ -24,12 +26,8 @@ namespace PizzaBox.Client.Controllers
     [HttpPost]
     public IActionResult Order(PizzaViewModel model)
     {
-      if(model != null){
-        ViewData["pizza"] = model;
-        return View();
-      }
-      ViewData["pizza"] = model;
-      return View();
+      selection.Add(model);
+      return View("OrderDetails", selection);
     }
   }
 }

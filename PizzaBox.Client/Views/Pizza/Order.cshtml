@@ -1,39 +1,35 @@
 @model PizzaBox.Client.Models.PizzaViewModel
-@using PizzaBox.Domain.Models
 
-  @if(@Model.Pizzas != null)
-  {
-    @foreach(var p in @Model.Pizzas)
-    {
-      <form action="/pizza/order" method = "post">
+<div class="container subpage">
+  
+  <div class="title">
+    <p>Select your Order</p>
+  </div>
+  <form action="/pizza/order" method = "post">  
       <div class="formContent">
-        <span class ="form-control" name="@Model.SelectedPizza" value="@p.Name">@p.Name </span>
-        <select name="Sizes"  class="custom-select">
+        
+        <select asp-for="@Model.SelectedPizza" class="custom-select">
+          @foreach (var pizza in @Model.Pizzas)
+          {
+            <option value="@pizza.Name" selected><strong>@pizza.Name</strong></option>
+          }
+        </select><br><br>
+        
+        <select asp-for="@Model.SelectedSize"  class="custom-select">
           @foreach (var size in @Model.Sizes)
           {
-            <option value="@size" selected>@size.Name : $@size.Price</option>
-            }
+            <option value="@size.Name" selected>@size.Name : $@size.Price</option>
           }
         </select>
         @*Give quantity and return back the selected values*@
           Quantity: <input type="number" asp-for="@Model.Quantity"/>
           <button class = "btn btn float-right btn-primary" type="submit" value="Order">Add To Cart</button>
       </div>
-      
-    </form> <br><br>
-    }
-   
-  }
-     <p>@ViewData["user"]</p>
-    @* @{
-    List<Pizza> lp = (List<Pizza>)@ViewData["pizza"];
-      foreach (var item in lp)
-      {
-          <div>@item.Name</div>
-      }
-    }  *@
+     <br><br>
+    </form>
   
- 
+     <p>@ViewData["pizza"]</p>
+</div>
    
   
 

@@ -1,17 +1,19 @@
-<div class="jumbotron">
-    <a href="/account/logout">logout</a>
-  <h1 class="display-4">Welcome @ViewData["store"]</h1>
-  <p class="lead">Welcome To Store</p>
-  <hr class="my-4">
-  @* <div class="btn-group" data-toggle="buttons" style="padding-bottom:10px"> *@
-        @* <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "user", new {name="Type"}) User
-        </label>
+@{
+  Layout = "_Layout";
 
-        <label class="btn btn-primary">
-            @Html.RadioButtonFor(model => model.Type, "store", new {name="Type"}) Store
-        </label> *@
-        <a href="order/history">Order history</a>
-        <a href="order/history">Inventory</a>
-    @* </div><br> *@
+}
+
+
+<div class="container-full-bg">
+    <div class="jumbotron">
+        <div class="container">
+            <a href="/account/logout">logout</a>
+            <h1 class="display-4">Welcome @Model.UserName</h1>
+            <p class="lead">Welcome To Store</p>
+            <hr class="my-4">
+            <a href="order/history">Inventory</a>
+            <a href="/store/add">Add Stocks</a>
+            @Html.ActionLink("Add Stocks", "add", "store");
+            </div>
+        </div>
 </div>

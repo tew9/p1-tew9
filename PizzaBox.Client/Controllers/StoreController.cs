@@ -6,12 +6,15 @@ namespace PizzaBox.Client.Controllers
   public class StoreController : Controller
   {
     [HttpGet]
-    public IActionResult Store()
+    public IActionResult Add()
     { 
-      // ViewData["pizza"] =pm.Pizz();
       return View();
     }
 
-   
+    public IActionResult Inventory()
+    {
+      return View();
+    }
+
   }
 }
