@@ -7,11 +7,10 @@
     <!-- Icon -->
     <div class="fadeIn first">
       <i class='fas fa-user-check' id="icon" style='font-size:48px;color:red'></i>
-      
-   
-    
+    </div>
     <!-- Login Form -->
     <form action="/account/login" method="POST">
+    @Html.AntiForgeryToken()
       <input type="text" id="username" class="fadeIn second" asp-for="@Model.UserName" placeholder="username" required>
       <input type="password" id="password" class="fadeIn third" asp-for="@Model.Password" placeholder="password" required>
      
@@ -28,7 +27,6 @@
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
-      <a class="underlineHover" href="#">Forgot Password?</a><br>
       <a class="underlineHover" asp-controller="Account" asp-action="Register">Register</a>
     </div>
 

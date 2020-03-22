@@ -1,24 +1,21 @@
 @model PizzaBox.Client.Models.UserModel
+@{
+  Layout = "_LogedLayout";
+  ViewData["log"] = "Logout";
+} 
 
-<div class="subpage">
-    <div>
-        <a class = "btn btn-float-right" href="/account/logout">logout</a>
-        <h1 class="display-4">Welcome @Model.UserName</h1>
-        <p class="lead">Choose the store you want to order from?</p>
-        <hr class="my-3">
-  </div>
-
-   <div class="btn-group" data-toggle="buttons">
-        @foreach(var store in @Model.Stores)
-        {
-            <label class="btn btn-primary">
-                @Html.RadioButtonFor(s => s.Store, @store.Name)@store.Name
-            </label>
-        }
-   </div>
-  
-    <a href="/pizza/order">Order History</a>
-    
-    @Html.ActionLink("Send", "order", "pizza", new {store = @Model.Store}, null);
-     
+<div class="container subpage">
+  <div class="title">
+    <p>Choose your Store To Order From</p>
+    <h1 class="display-4">Welcome @Model.UserName</h1>
+  </div>   
+    <hr class="my-3"> 
+    @foreach(var store in @Model.Stores)
+    {
+        <label class="btn " style="background-color: orange;">
+            @Html.RadioButtonFor(s => s.Store, @store.Name)@store.Name
+        </label><br><br>
+    }
+  <a href="/pizza/order">Order History</a><br>
+  @Html.ActionLink("Send", "order", "pizza", new {store = @Model.Store}, null)
 </div> 
