@@ -30,10 +30,17 @@ namespace PizzaBox.Client.Controllers
       return View("OrderDetails", selection);
     }
 
-    public IActionResult OrderDetails(PizzaViewModel model)
+    // [HttpGet]
+    public IActionResult OrderDetails(int Id)
     {
-      selection.Add(model);
+      selection.RemoveAt(Id);
       return View("OrderDetails", selection);
     }
+    // public IActionResult OrderDetails(PizzaViewModel model)
+    // {
+    //   // model.ToList()
+    //   selection.Add(model);
+    //   return View("OrderDetails", selection);
+    // }
   }
 }
