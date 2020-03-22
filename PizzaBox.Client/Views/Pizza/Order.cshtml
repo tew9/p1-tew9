@@ -29,6 +29,7 @@
         @*Give quantity and return back the selected values*@
           Quantity: <input type="number" asp-for="@Model.Quantity"/>
           <button class = "btn btn float-right btn-primary" type="submit" value="Order">Add To Cart</button>
+          @Html.HiddenFor(s => s.Id, @Model.Id);
       </div>
      <br><br>
     </form>

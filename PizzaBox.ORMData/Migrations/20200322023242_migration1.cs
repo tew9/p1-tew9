@@ -173,10 +173,13 @@ namespace PizzaBox.ORMData.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1L, "Vegies" },
+                    { 5L, "Chicago Deep Dish" },
+                    { 7L, "Vegie Pizza" },
                     { 2L, "Chickens Pizza" },
                     { 3L, "Pepperoni" },
-                    { 4L, "Cheese Pizza" }
+                    { 4L, "Cheese Pizza" },
+                    { 1L, "The Original Neapolitan" },
+                    { 6L, "California Style" }
                 });
 
             migrationBuilder.InsertData(
@@ -195,8 +198,10 @@ namespace PizzaBox.ORMData.Migrations
                 values: new object[,]
                 {
                     { 1L, "tango", "tango@gmail.com", "Tew", "123", "user", "tango" },
+                    { 4L, "Andrew", "tango@gmail.com", "AGatep", "123", "user", "drew" },
                     { 2L, "Mark", "mark@gmail.com", "John", "456", "store", "mark" },
-                    { 3L, "Dr. Frank", "fred@gmail.com", "Fred", "123", "store", "fred" }
+                    { 3L, "Dr. Frank", "fred@gmail.com", "Fred", "123", "store", "fred" },
+                    { 5L, "William", "john@gmail.com", "John", "123", "store", "john" }
                 });
 
             migrationBuilder.InsertData(
@@ -224,7 +229,8 @@ namespace PizzaBox.ORMData.Migrations
                 values: new object[,]
                 {
                     { 1L, "Dominos", 2L, "123 bcd st, Arlington tx" },
-                    { 2L, "Pizza Hut", 3L, "456 DeF, Arlington Tx" }
+                    { 2L, "Pizza Hut", 3L, "456 DeF, Arlington Tx" },
+                    { 3L, "Papa John's", 3L, "456 DeF, Arlington Tx" }
                 });
 
             migrationBuilder.InsertData(
@@ -239,7 +245,11 @@ namespace PizzaBox.ORMData.Migrations
                     { 2L, 1L, 5 },
                     { 2L, 2L, 10 },
                     { 2L, 3L, 20 },
-                    { 2L, 4L, 6 }
+                    { 2L, 4L, 6 },
+                    { 3L, 5L, 6 },
+                    { 3L, 6L, 4 },
+                    { 3L, 1L, 7 },
+                    { 3L, 2L, 6 }
                 });
 
             migrationBuilder.CreateIndex(

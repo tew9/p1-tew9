@@ -10,7 +10,7 @@ using PizzaBox.ORMData.Database;
 namespace PizzaBox.ORMData.Migrations
 {
     [DbContext(typeof(PizzaBoxDBContext))]
-    [Migration("20200318054113_migration1")]
+    [Migration("20200322023242_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -61,8 +61,13 @@ namespace PizzaBox.ORMData.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1L,
-                            Name = "Vegies"
+                            Id = 5L,
+                            Name = "Chicago Deep Dish"
+                        },
+                        new
+                        {
+                            Id = 7L,
+                            Name = "Vegie Pizza"
                         },
                         new
                         {
@@ -78,6 +83,16 @@ namespace PizzaBox.ORMData.Migrations
                         {
                             Id = 4L,
                             Name = "Cheese Pizza"
+                        },
+                        new
+                        {
+                            Id = 1L,
+                            Name = "The Original Neapolitan"
+                        },
+                        new
+                        {
+                            Id = 6L,
+                            Name = "California Style"
                         });
                 });
 
@@ -241,6 +256,30 @@ namespace PizzaBox.ORMData.Migrations
                             StoreId = 2L,
                             Id = 4L,
                             Inventory = 6
+                        },
+                        new
+                        {
+                            StoreId = 3L,
+                            Id = 5L,
+                            Inventory = 6
+                        },
+                        new
+                        {
+                            StoreId = 3L,
+                            Id = 6L,
+                            Inventory = 4
+                        },
+                        new
+                        {
+                            StoreId = 3L,
+                            Id = 1L,
+                            Inventory = 7
+                        },
+                        new
+                        {
+                            StoreId = 3L,
+                            Id = 2L,
+                            Inventory = 6
                         });
                 });
 
@@ -318,6 +357,13 @@ namespace PizzaBox.ORMData.Migrations
                             Name = "Pizza Hut",
                             UserId = 3L,
                             location = "456 DeF, Arlington Tx"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Name = "Papa John's",
+                            UserId = 3L,
+                            location = "456 DeF, Arlington Tx"
                         });
                 });
 
@@ -363,6 +409,16 @@ namespace PizzaBox.ORMData.Migrations
                         },
                         new
                         {
+                            Id = 4L,
+                            Name = "Andrew",
+                            email = "tango@gmail.com",
+                            lastname = "AGatep",
+                            password = "123",
+                            type = "user",
+                            username = "drew"
+                        },
+                        new
+                        {
                             Id = 2L,
                             Name = "Mark",
                             email = "mark@gmail.com",
@@ -380,6 +436,16 @@ namespace PizzaBox.ORMData.Migrations
                             password = "123",
                             type = "store",
                             username = "fred"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Name = "William",
+                            email = "john@gmail.com",
+                            lastname = "John",
+                            password = "123",
+                            type = "store",
+                            username = "john"
                         });
                 });
 

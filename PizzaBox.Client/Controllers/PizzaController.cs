@@ -29,5 +29,11 @@ namespace PizzaBox.Client.Controllers
       selection.Add(model);
       return View("OrderDetails", selection);
     }
+
+    public IActionResult OrderDetails(PizzaViewModel model)
+    {
+      selection.Add(model);
+      return View("OrderDetails", selection);
+    }
   }
 }

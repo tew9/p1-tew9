@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using PizzaBox.Domain.Models;
 using PizzaBox.ORMData.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace PizzaBox.Client.Models
 {
@@ -17,14 +18,15 @@ namespace PizzaBox.Client.Models
     public string SelectedPizza { get; set; }
     public string SelectedSize { get; set; }
 
+    public long Id {get; set;}
     public decimal Price { get; set; }
     // public int SelectedQnty { get; set; }
      
     public PizzaViewModel()
     {
-      
+      Id = DateTime.Now.Ticks;
       //Get List of Pizza associated with the store id.
-      Pizzas = _ps.GetPizza(1); 
+      Pizzas = _ps.GetPizza(3); 
       
       Sizes = _ps.GetSize();
     }

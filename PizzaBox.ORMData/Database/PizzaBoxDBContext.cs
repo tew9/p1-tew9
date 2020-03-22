@@ -54,16 +54,21 @@ namespace PizzaBox.ORMData.Database
             {
                 new User() {Id = 1, Name = "tango", lastname = "Tew", username = "tango", password = "123", 
                             email = "tango@gmail.com",type = "user"},
+                new User() {Id = 4, Name = "Andrew", lastname = "AGatep", username = "drew", password = "123", 
+                            email = "tango@gmail.com",type = "user"},
                 new User() {Id = 2, Name = "Mark", lastname = "John", username = "mark", password = "456",
                             email = "mark@gmail.com", type = "store"},
                 new User() {Id = 3, Name = "Dr. Frank", lastname = "Fred", username = "fred", password = "123",
-                            email = "fred@gmail.com", type = "store"}
+                            email = "fred@gmail.com", type = "store"},
+                new User() {Id = 5, Name = "William", lastname = "John", username = "john", password = "123",
+                            email = "john@gmail.com", type = "store"}
             });
             
             builder.Entity<Store>().HasData(new Store[]
             {
                 new Store(){Id=1, Name="Dominos", location="123 bcd st, Arlington tx", UserId = 2},
-                new Store() {Id=2, Name="Pizza Hut", location="456 DeF, Arlington Tx", UserId = 3}
+                new Store() {Id=2, Name="Pizza Hut", location="456 DeF, Arlington Tx", UserId = 3},
+                new Store() {Id=3, Name="Papa John's", location="456 DeF, Arlington Tx", UserId = 3}
             });
 
            //Seed data for the conjunction table because the store and pizza are pre-defined
@@ -76,15 +81,23 @@ namespace PizzaBox.ORMData.Database
                  new PizzaStore(){Id = 1,  StoreId = 2, Inventory = 5},
                 new PizzaStore(){Id = 2,  StoreId = 2, Inventory = 10},
                 new PizzaStore(){Id = 3,  StoreId = 2, Inventory = 20},
-                new PizzaStore(){Id = 4,  StoreId = 2, Inventory = 6}
+                new PizzaStore(){Id = 4,  StoreId = 2, Inventory = 6},
+                new PizzaStore(){Id = 5,  StoreId = 3, Inventory = 6},
+                new PizzaStore(){Id = 6,  StoreId = 3, Inventory = 4},
+                new PizzaStore(){Id = 1,  StoreId = 3, Inventory = 7},
+                new PizzaStore(){Id = 2,  StoreId = 3, Inventory = 6}
             });
 
             builder.Entity<Pizza>().HasData(new Pizza[]
             {
-                new Pizza(){Id = 1, Name = "Vegies"},
+                new Pizza(){Id = 5, Name = "Chicago Deep Dish"},
+                new Pizza(){Id = 7, Name = "Vegie Pizza"},
                 new Pizza(){Id =2, Name = "Chickens Pizza"},
                 new Pizza(){Id = 3, Name = "Pepperoni"},
-                new Pizza(){Id = 4, Name = "Cheese Pizza"}
+                new Pizza(){Id = 4, Name = "Cheese Pizza"},
+                new Pizza(){Id = 1, Name = "The Original Neapolitan"},
+                new Pizza(){Id = 6, Name = "California Style"}
+               
             });
 
             builder.Entity<PizzaSize>().HasData(new PizzaSize[]

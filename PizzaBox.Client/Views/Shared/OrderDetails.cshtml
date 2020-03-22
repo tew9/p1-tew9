@@ -20,18 +20,24 @@
         decimal totprice = 0.0M;
         int idx = 1;
       }
-
-      @foreach(var order in @Model)
+      @if(@Model != null)
       {
-        decimal price = order.Price * order.Quantity;
-        <tr>
-          <th scope="row">@idx</th>
-          <td>@order.SelectedPizza</td>
-          <td>@order.SelectedSize</td>
-          <td>@order.Quantity</td>
-          <td>@price</td>
-        </tr>
-        idx ++;
+        @foreach(var order in @Model)
+        {
+          if(order.SelectedPizza != null)
+          {
+            decimal price = order.Price * order.Quantity;
+            <tr>
+              <th scope="row">@idx</th>
+              <td>@order.SelectedPizza</td>
+              <td>@order.SelectedSize</td>
+              <td>@order.Quantity</td>
+              <td>@price</td>
+              <td><a href = "/pizza/orderdetails" class="fa fa-remove" style="font-size:48px;color:red"></a></td>
+            </tr>
+            idx ++;
+          }
+        }
       }
     </tbody>
     <tfoot>
