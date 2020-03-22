@@ -40,10 +40,8 @@ namespace PizzaBox.ORMData.Database
 
             //Navigational Relationships.
             builder.Entity<Order>().HasMany(po => po.PizzaOrders).WithOne(o => o.Order).HasForeignKey(o => o.OrderId);
-           
             builder.Entity<Size>().HasMany(sp => sp.PizzaSizes).WithOne(s => s.Size).HasForeignKey(s => s.SizeId);
             builder.Entity<Pizza>().HasMany(ps => ps.PizzaSizes).WithOne(p => p.Pizza).HasForeignKey(p => p.Id);
-            //read as Pizza entity has many Pizzaorders relating with one pizza with PizzaId as a foreign key in PizzaOrders
             builder.Entity<Pizza>().HasMany(po => po.PizzaOrders).WithOne(p => p.Pizza).HasForeignKey(p => p.Id); 
             
             builder.Entity<Store>().HasMany(sp => sp.PizzaStore).WithOne(s => s.Store).HasForeignKey(s => s.StoreId);

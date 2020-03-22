@@ -18,16 +18,16 @@ namespace PizzaBox.Client.Models
     public string SelectedPizza { get; set; }
     public string SelectedSize { get; set; }
 
-    public long Id {get; set;}
+    public int Id {get; set;}
     public decimal Price { get; set; }
+    // public decimal TotPrice { get; set; }
     // public int SelectedQnty { get; set; }
      
     public PizzaViewModel()
     {
-      Id = DateTime.Now.Ticks;
+      Id++;
       //Get List of Pizza associated with the store id.
       Pizzas = _ps.GetPizza(3); 
-      
       Sizes = _ps.GetSize();
     }
   }

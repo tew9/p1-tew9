@@ -11,6 +11,7 @@
   <div class="title">
     <p>Detail of the Order</p>
   </div>
+  <p>@ViewData["price"]</p>
   <table class="table">
     <thead class = "table-dark">
       <tr>
@@ -35,18 +36,26 @@
           {
             if(order.SelectedSize.Equals("Large"))
             {
-              price = 13.50M;
+              price = 13.50M * order.Quantity;
+              totprice += price;
+            }else if(order.SelectedSize.Equals("Medium"))
+            {
+              price = 10.50M * order.Quantity;
+              totprice += price;
+              
             }else
             {
-
+              price = 8.25M * order.Quantity;
+              totprice += price;
             }
-            @* decimal price = order.Price * order.Quantity; *@
+           
             <tr>
               <th scope="row">@idx</th>
               <td>@order.SelectedPizza</td>
               <td>@order.SelectedSize</td>
               <td>@order.Quantity</td>
               <td>@price</td>
+              @order.Id++;
               <td><a href = "/pizza/orderdetails/@order.Id" class="fa fa-remove" style="font-size:28px;color:red"></a></td>
             </tr>
             idx ++;
@@ -66,6 +75,6 @@
   </table>
   <a class = "btn btn-primary" href="/pizza/order">Add More</a>
   <div style="padding: 3em;">
-    <button class = "btn float-right btn-success" style="width:100%" type="submit" value="Order">Checkout</button>
+    <a class = "btn float-right btn-success" href = "/pizza/checkout/@Model" style="width:100%" type="submit" value="Order">Checkout</a>
   </div>
 </div>
