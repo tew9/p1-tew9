@@ -17,18 +17,21 @@
     </thead>
     <tbody>
       @{
-        decimal totprice = 0;
+        decimal totprice = 0.0M;
+        int idx = 1;
       }
+
       @foreach(var order in @Model)
       {
         decimal price = order.Price * order.Quantity;
         <tr>
-          <th scope="row">1</th>
+          <th scope="row">@idx</th>
           <td>@order.SelectedPizza</td>
           <td>@order.SelectedSize</td>
           <td>@order.Quantity</td>
-          <td>123@price</td>
+          <td>@price</td>
         </tr>
+        idx ++;
       }
     </tbody>
     <tfoot>
@@ -37,8 +40,12 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>@totprice</td>
+        <td>$@totprice</td>
       </tr>
     </tfoot>
   </table>
+  <a class = "btn btn-primary" href="/pizza/order">Add More</a>
+  <div style="padding: 3em;">
+    <button class = "btn float-right btn-success" style="width:100%" type="submit" value="Order">Checkout</button>
+  </div>
 </div>
