@@ -12,7 +12,7 @@
 <div class="container subpage">
   
   <div class="title">
-    <p>Welcome @TempData["username"]</p>
+    <p>Choose Pizza to Order</p>
   </div>
   <form action="/pizza/order" method = "post">  
   @Html.AntiForgeryToken()
@@ -32,7 +32,7 @@
       </select>
 
       <input type="hidden" asp-for="@Model.Price" value="@price">
-      Quantity: <input type="number" placeholder = "1" min = "1" max="250" title="You can't order more than 250" asp-for="@Model.Quantity"/>
+      Quantity: <input type="number" placeholder = "1" min = "1" max="50" title="You can't order more than 250" asp-for="@Model.Quantity"/>
       <div>
         <button class = "btn btn float-right btn-primary" type="submit" value="Order">Add To Cart</button>
       </div>

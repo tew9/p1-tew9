@@ -10,7 +10,7 @@ using PizzaBox.ORMData.Database;
 namespace PizzaBox.ORMData.Migrations
 {
     [DbContext(typeof(PizzaBoxDBContext))]
-    [Migration("20200323095045_migration1")]
+    [Migration("20200323140321_migration1")]
     partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

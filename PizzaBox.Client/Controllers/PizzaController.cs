@@ -15,8 +15,6 @@ namespace PizzaBox.Client.Controllers
     private static readonly PizzaRepository _pr = new PizzaRepository();
     private static readonly PizzaBoxDBContext _db = new PizzaBoxDBContext();
     
-    
-
     [HttpGet]
     public IActionResult Order()
     { 
@@ -58,17 +56,21 @@ namespace PizzaBox.Client.Controllers
       decimal total;
       total = System.Convert.ToDecimal(id);
       long userId = System.Convert.ToInt64(TempData["userid"]);
-    
+      if(TempData["userid"] == null)
+      {
+        return View("OrderDetails");
+      }
       Order order = new Order();
       order.UserId = userId;
       order.StoreId = 3;
       order.totPrice = total;
+      long orderId = order.OrderId;      
 
       foreach(var pizza in _selection)
       {
         PizzaOrder po = new PizzaOrder();
         po.Quantity = pizza.Quantity;
-        po.OrderId = order.OrderId;
+        po.OrderId = orderId;
         Pizza p = _pr.Get(pizza.SelectedPizza);
         po.Id = p.Id;
         order.PizzaOrders.Add(po);
@@ -76,7 +78,12 @@ namespace PizzaBox.Client.Controllers
         var save = _db.SaveChanges() == 1;
       }
       _selection.Clear();
-       return View("OrderDetails");
+      _selection = new List<PizzaViewModel>();
+      foreach(var sel in _selection)
+      {
+        _selection.Remove(sel);
+      }
+       return View("OrderDetails", _selection);
     }
   }
 }
