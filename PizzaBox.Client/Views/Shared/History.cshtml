@@ -1,0 +1,44 @@
+@model List<PizzaViewModel>
+
+@{
+  Layout = "_LogedLayout";
+  ViewData["log"] = "Logout";
+} 
+
+
+<div class="container subpage">
+  
+  <div class="title">
+    <p>Order History</p>
+  </div>
+  <table class="table">
+    <thead class = "table-dark">
+      <tr>
+        <th scope="col">No:</th>
+        <th scope="col">Pizza Name</th>
+        <th scope="col">Pizza Size</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>dummy</td>
+        <td>dummy</td>
+        <td>dummy3</td>
+      </tr>
+    </tbody>
+    @* <tfoot>
+      <tr>
+        <th>Total Price</th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>$@totprice</td>
+      </tr>
+    </tfoot> *@
+  </table>
+  <a class = "btn btn-primary" href="/pizza/order">New More</a>
+</div>
+
