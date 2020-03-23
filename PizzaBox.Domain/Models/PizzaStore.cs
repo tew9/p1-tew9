@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
   public class PizzaStore
   { 
    
+   public long PizzaStoreId { get; set; }
    #region Navigational Properties.
    public long Id { get; set;}
    public Pizza pizza {get; set; } //list of orders referenced using the Id in line 12

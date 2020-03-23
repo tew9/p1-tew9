@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
 using PizzaBox.Domain.Models;
+using PizzaBox.ORMData.Database;
+using PizzaBox.ORMData.Repositories;
 
 namespace PizzaBox.Client.Controllers
 {
@@ -9,19 +11,30 @@ namespace PizzaBox.Client.Controllers
   {
 
     private static List<PizzaViewModel> _selection = new List<PizzaViewModel>();
-    private static decimal _totalPrice = 0;
+    private static readonly OrderRepository _or = new OrderRepository();
+    private static readonly PizzaRepository _pr = new PizzaRepository();
+    private static readonly PizzaBoxDBContext _db = new PizzaBoxDBContext();
+    
     
 
     [HttpGet]
-    public IActionResult Order(string store)
-    {       
+    public IActionResult Order()
+    { 
       return View(new PizzaViewModel());
     }
 
     [HttpPost]
     public IActionResult Order(PizzaViewModel model)
     {
-      // _selection.Add(_totalPrice);
+      model.Id++;
+      foreach(var m in _selection)
+      {
+        if(m.SelectedSize.Equals(model.SelectedSize) && m.SelectedPizza.Equals(model.SelectedPizza))
+        {
+          m.Quantity += model.Quantity;
+          return View("OrderDetails", _selection);
+        }
+      }
       _selection.Add(model);
       return View("OrderDetails", _selection);
     }
@@ -29,14 +42,41 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult OrderDetails(int Id)
     {
-      _selection.RemoveAt(Id);
+      if(Id >= 0){
+        _selection.RemoveAt(Id);
+      }else
+      {
+        _selection.RemoveAt(0);
+      }
+      
       return View("OrderDetails", _selection);
     }
 
-    public IActionResult Checkout(PizzaViewModel model)
+    public IActionResult Checkout(string id)
     {
-      TempData["checkout"] = model.SelectedPizza;
-      return View("OrderDetails");
+      
+      decimal total;
+      total = System.Convert.ToDecimal(id);
+      // long Id = System.Convert.ToInt32(TempData["userid"].ToString());
+    
+      Order order = new Order();
+      order.UserId = 2;
+      order.StoreId = 3;
+      order.totPrice = total;
+
+      foreach(var pizza in _selection)
+      {
+        PizzaOrder po = new PizzaOrder();
+        po.Quantity = pizza.Quantity;
+        po.OrderId = order.OrderId;
+        Pizza p = _pr.Get(pizza.SelectedPizza);
+        po.Id = p.Id;
+        order.PizzaOrders.Add(po);
+        _db.Orders.Add(order);
+        var save = _db.SaveChanges() == 1;
+      }
+      _selection.Clear();
+       return View("OrderDetails");
     }
   }
 }

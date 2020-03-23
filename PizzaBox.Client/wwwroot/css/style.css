@@ -262,7 +262,6 @@ input[type=text]:placeholder, input[type=email]:placeholder, input[type=password
     background: -webkit-linear-gradient(left, #0072ff, #8811c5);
     color: #fff;
     font-weight: bold;
-    line-height: 80px;
     margin-bottom: 5em;
 }
 

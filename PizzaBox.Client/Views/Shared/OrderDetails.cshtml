@@ -11,7 +11,6 @@
   <div class="title">
     <p>Detail of the Order</p>
   </div>
-  <p>@ViewData["price"]</p>
   <table class="table">
     <thead class = "table-dark">
       <tr>
@@ -31,7 +30,7 @@
       @if(@Model != null)
       {
         @foreach(var order in @Model)
-        {
+        { 
           if(order.SelectedPizza != null) //to avoid displaying empty fields after delete
           {
             if(order.SelectedSize.Equals("Large"))
@@ -48,18 +47,17 @@
               price = 8.25M * order.Quantity;
               totprice += price;
             }
-           
-            <tr>
+
+              <tr>
               <th scope="row">@idx</th>
               <td>@order.SelectedPizza</td>
               <td>@order.SelectedSize</td>
               <td>@order.Quantity</td>
-              <td>@price</td>
-              @order.Id++;
+              <td>$@price</td>
               <td><a href = "/pizza/orderdetails/@order.Id" class="fa fa-remove" style="font-size:28px;color:red"></a></td>
             </tr>
             idx ++;
-          }
+          } 
         }
       }
     </tbody>
@@ -74,7 +72,11 @@
     </tfoot>
   </table>
   <a class = "btn btn-primary" href="/pizza/order">Add More</a>
+  <p>@TempData["userid"]</p>
   <div style="padding: 3em;">
-    <a class = "btn float-right btn-success" href = "/pizza/checkout/@Model" style="width:100%" type="submit" value="Order">Checkout</a>
+    
+      <a class = "btn float-right btn-success" href = "/pizza/checkout/@totprice" style="width:100%" type="submit" value="checkout">Checkout</a>
+    
   </div>
 </div>
+

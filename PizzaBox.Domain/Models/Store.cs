@@ -7,13 +7,10 @@ namespace PizzaBox.Domain.Models
     public class Store: AComponents
     {
         public string location { get; set; }
-
         #region Navigational Properties
-            public List<PizzaStore> PizzaStore { get; set; }
-            public User User { get; set; }
-            public long UserId { get; set; } 
+        public List<PizzaStore> PizzaStore { get; set; }
+        public string Manager { get; set; } 
         #endregion
-
         public Store(){}
     }
 }

@@ -40,9 +40,10 @@ namespace PizzaBox.Client.Controllers
             if(account.Login(account.Password, dbuser))
             {   
                 string usertype = dbuser.type;
-                
+                TempData["userid"] = dbuser.Id.ToString();
                 if(usertype == "user")
                 {
+                    
                     return View("User", account);
                 }
                          

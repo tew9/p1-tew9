@@ -12,23 +12,21 @@ namespace PizzaBox.ORMData.Repositories
 
     public List<Pizza> Get()
     {
-      return _db.Pizzas.Include(ps => ps.PizzaSizes).ToList();
+      return _db.Pizzas.ToList();
     }
 
-
+   public List<Size> GetSize(string name)
+    {
+      return _db.Sizes.ToList();
+    }
     public List<Size> GetSize()
     {
       return _db.Sizes.ToList();
     }
-    public List<Pizza> GetPizzaSize(long id)
-    {
-      var pizza = _db.Pizzas.SingleOrDefault(p => p.Id == id);
-      return _db.Pizzas.Include(ps => ps.PizzaSizes) .Where(ps => ps.Id == pizza.Id).ToList();
-    }
 
-    public Pizza Get(long id)
+    public Pizza Get(string name)
     {
-      return _db.Pizzas.SingleOrDefault(p => p.Id == id);
+      return _db.Pizzas.SingleOrDefault(p => p.Name == name);
     }
 
     public List<Pizza>  GetPizza(long id)
@@ -48,25 +46,10 @@ namespace PizzaBox.ORMData.Repositories
       return lp;                                                                //join Pizzastore as p on p.Id = store.Id
     }
 
-    public bool Post(Pizza pizza, PizzaSize ps)
-    {
-      _db.Pizzas.Add(pizza);
-      return _db.SaveChanges() == 1;
-    }
-
-    public bool Put(Pizza pizza, Size size)
-    {
-      List<Pizza> p = GetPizzaSize(pizza.Id);
-      foreach(var ps in p)
-      {
-        ps.Name = pizza.Name;
-        ps.Id = pizza.Id;
-        foreach(var s in ps.PizzaSizes)
-        {
-          s.Size = size;
-        }
-      }
-      return _db.SaveChanges() == 1;
-    }
+    // public bool Post(int inventory)
+    // {
+    //   // _db.Pizzas.Add(inventory);
+    //   return _db.SaveChanges() == 1;
+    // }
   }
 }

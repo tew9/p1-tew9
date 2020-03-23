@@ -30,23 +30,20 @@ namespace PizzaBox.ORMData.Database
         {
             //setup mapping keys, keys that will be used to uniqely map c# object to the correct db table and viceversa
             builder.Entity<User>().HasKey( user => user.Id);
-            builder.Entity<Order>().HasKey( order => order.orderId);
+            builder.Entity<Order>().HasKey( order => order.OrderId);
             builder.Entity<Size>().HasKey( size => size.Id);
             builder.Entity<Pizza>().HasKey( pizza => pizza.Id);
             builder.Entity<Store>().HasKey( store => store.Id);
-            builder.Entity<PizzaOrder>().HasKey(p => new { p.Id, p.OrderId});
-            builder.Entity<PizzaStore>().HasKey(s => new { s.StoreId, s.Id});
-            builder.Entity<PizzaSize>().HasKey(s => new { s.SizeId, s.Id });
+            builder.Entity<PizzaOrder>().HasKey(po => new {po.OrderId, po.Id});
+            builder.Entity<PizzaStore>().HasKey(ps => new {ps.Id, ps.StoreId});
+          
 
             //Navigational Relationships.
-            builder.Entity<Order>().HasMany(po => po.PizzaOrders).WithOne(o => o.Order).HasForeignKey(o => o.OrderId);
-            builder.Entity<Size>().HasMany(sp => sp.PizzaSizes).WithOne(s => s.Size).HasForeignKey(s => s.SizeId);
-            builder.Entity<Pizza>().HasMany(ps => ps.PizzaSizes).WithOne(p => p.Pizza).HasForeignKey(p => p.Id);
+            builder.Entity<Order>().HasMany(op => op.PizzaOrders).WithOne(o => o.Order).HasForeignKey(o => o.OrderId);
             builder.Entity<Pizza>().HasMany(po => po.PizzaOrders).WithOne(p => p.Pizza).HasForeignKey(p => p.Id); 
-            
             builder.Entity<Store>().HasMany(sp => sp.PizzaStore).WithOne(s => s.Store).HasForeignKey(s => s.StoreId);
             builder.Entity<Pizza>().HasMany(ps => ps.PizzaStores).WithOne(p => p.pizza).HasForeignKey(p => p.Id);
-
+            
             //Seeding the data
             builder.Entity<User>().HasData(new User[]
             {
@@ -64,9 +61,9 @@ namespace PizzaBox.ORMData.Database
             
             builder.Entity<Store>().HasData(new Store[]
             {
-                new Store(){Id=1, Name="Dominos", location="123 bcd st, Arlington tx", UserId = 2},
-                new Store() {Id=2, Name="Pizza Hut", location="456 DeF, Arlington Tx", UserId = 3},
-                new Store() {Id=3, Name="Papa John's", location="456 DeF, Arlington Tx", UserId = 3}
+                new Store(){Id=1, Name="Dominos", location="123 bcd st, Arlington tx", Manager = "fred"},
+                new Store() {Id=2, Name="Pizza Hut", location="456 DeF, Arlington Tx", Manager = "john"},
+                new Store() {Id=3, Name="Papa John's", location="456 DeF, Arlington Tx", Manager = "mark"}
             });
 
            //Seed data for the conjunction table because the store and pizza are pre-defined
@@ -96,22 +93,6 @@ namespace PizzaBox.ORMData.Database
                 new Pizza(){Id = 1, Name = "The Original Neapolitan"},
                 new Pizza(){Id = 6, Name = "California Style"}
                
-            });
-
-            builder.Entity<PizzaSize>().HasData(new PizzaSize[]
-            {
-                new PizzaSize(){Id = 1, SizeId = 1},
-                new PizzaSize(){Id = 1, SizeId = 2},
-                new PizzaSize(){Id = 1, SizeId = 3},
-                new PizzaSize(){Id = 2, SizeId = 1},
-                new PizzaSize(){Id = 2, SizeId = 2},
-                new PizzaSize(){Id = 2, SizeId = 3},
-                new PizzaSize(){Id = 3, SizeId = 1},
-                new PizzaSize(){Id = 3, SizeId = 2},
-                new PizzaSize(){Id = 3, SizeId = 3},
-                new PizzaSize(){Id = 4, SizeId = 1},
-                new PizzaSize(){Id = 4, SizeId = 2},
-                new PizzaSize(){Id = 4, SizeId = 3},
             });
 
             builder.Entity<Size>().HasData(new Size[]

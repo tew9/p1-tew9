@@ -9,7 +9,7 @@ namespace PizzaBox.Domain.Models
     public decimal Price { get; set; }
 
     #region Navigational Properties
-      public List<PizzaSize> PizzaSizes { get; set; }
+      public List<PizzaOrder> PizzaOrder { get; set; }
     #endregion
     public Size(){}
   }

@@ -21,21 +21,26 @@ namespace PizzaBox.ORMData.Migrations
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
                 {
-                    b.Property<long>("orderId")
+                    b.Property<long>("OrderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("UserId")
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("StoreId")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("orderTime")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("totPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("orderId");
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("StoreId");
 
                     b.HasIndex("UserId");
 
@@ -96,188 +101,131 @@ namespace PizzaBox.ORMData.Migrations
 
             modelBuilder.Entity("PizzaBox.Domain.Models.PizzaOrder", b =>
                 {
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("OrderId")
                         .HasColumnType("bigint");
 
-                    b.Property<int>("quantity")
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id", "OrderId");
+                    b.Property<long?>("SizeId")
+                        .HasColumnType("bigint");
 
-                    b.HasIndex("OrderId");
+                    b.HasKey("OrderId", "Id");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("SizeId");
 
                     b.ToTable("PizzaOrder");
                 });
 
-            modelBuilder.Entity("PizzaBox.Domain.Models.PizzaSize", b =>
-                {
-                    b.Property<long>("SizeId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("SizeId", "Id");
-
-                    b.HasIndex("Id");
-
-                    b.ToTable("PizzaSize");
-
-                    b.HasData(
-                        new
-                        {
-                            SizeId = 1L,
-                            Id = 1L
-                        },
-                        new
-                        {
-                            SizeId = 2L,
-                            Id = 1L
-                        },
-                        new
-                        {
-                            SizeId = 3L,
-                            Id = 1L
-                        },
-                        new
-                        {
-                            SizeId = 1L,
-                            Id = 2L
-                        },
-                        new
-                        {
-                            SizeId = 2L,
-                            Id = 2L
-                        },
-                        new
-                        {
-                            SizeId = 3L,
-                            Id = 2L
-                        },
-                        new
-                        {
-                            SizeId = 1L,
-                            Id = 3L
-                        },
-                        new
-                        {
-                            SizeId = 2L,
-                            Id = 3L
-                        },
-                        new
-                        {
-                            SizeId = 3L,
-                            Id = 3L
-                        },
-                        new
-                        {
-                            SizeId = 1L,
-                            Id = 4L
-                        },
-                        new
-                        {
-                            SizeId = 2L,
-                            Id = 4L
-                        },
-                        new
-                        {
-                            SizeId = 3L,
-                            Id = 4L
-                        });
-                });
-
             modelBuilder.Entity("PizzaBox.Domain.Models.PizzaStore", b =>
                 {
-                    b.Property<long>("StoreId")
+                    b.Property<long>("Id")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("Id")
+                    b.Property<long>("StoreId")
                         .HasColumnType("bigint");
 
                     b.Property<int>("Inventory")
                         .HasColumnType("int");
 
-                    b.HasKey("StoreId", "Id");
+                    b.Property<long>("PizzaStoreId")
+                        .HasColumnType("bigint");
 
-                    b.HasIndex("Id");
+                    b.HasKey("Id", "StoreId");
+
+                    b.HasIndex("StoreId");
 
                     b.ToTable("PizzaStore");
 
                     b.HasData(
                         new
                         {
-                            StoreId = 1L,
                             Id = 1L,
-                            Inventory = 5
+                            StoreId = 1L,
+                            Inventory = 5,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 1L,
                             Id = 2L,
-                            Inventory = 10
+                            StoreId = 1L,
+                            Inventory = 10,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 1L,
                             Id = 3L,
-                            Inventory = 20
-                        },
-                        new
-                        {
                             StoreId = 1L,
-                            Id = 4L,
-                            Inventory = 6
+                            Inventory = 20,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 2L,
+                            Id = 4L,
+                            StoreId = 1L,
+                            Inventory = 6,
+                            PizzaStoreId = 0L
+                        },
+                        new
+                        {
                             Id = 1L,
-                            Inventory = 5
+                            StoreId = 2L,
+                            Inventory = 5,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 2L,
                             Id = 2L,
-                            Inventory = 10
+                            StoreId = 2L,
+                            Inventory = 10,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 2L,
                             Id = 3L,
-                            Inventory = 20
-                        },
-                        new
-                        {
                             StoreId = 2L,
-                            Id = 4L,
-                            Inventory = 6
+                            Inventory = 20,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 3L,
+                            Id = 4L,
+                            StoreId = 2L,
+                            Inventory = 6,
+                            PizzaStoreId = 0L
+                        },
+                        new
+                        {
                             Id = 5L,
-                            Inventory = 6
+                            StoreId = 3L,
+                            Inventory = 6,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 3L,
                             Id = 6L,
-                            Inventory = 4
+                            StoreId = 3L,
+                            Inventory = 4,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 3L,
                             Id = 1L,
-                            Inventory = 7
+                            StoreId = 3L,
+                            Inventory = 7,
+                            PizzaStoreId = 0L
                         },
                         new
                         {
-                            StoreId = 3L,
                             Id = 2L,
-                            Inventory = 6
+                            StoreId = 3L,
+                            Inventory = 6,
+                            PizzaStoreId = 0L
                         });
                 });
 
@@ -326,18 +274,16 @@ namespace PizzaBox.ORMData.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Manager")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("location")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Stores");
 
@@ -345,22 +291,22 @@ namespace PizzaBox.ORMData.Migrations
                         new
                         {
                             Id = 1L,
+                            Manager = "fred",
                             Name = "Dominos",
-                            UserId = 2L,
                             location = "123 bcd st, Arlington tx"
                         },
                         new
                         {
                             Id = 2L,
+                            Manager = "john",
                             Name = "Pizza Hut",
-                            UserId = 3L,
                             location = "456 DeF, Arlington Tx"
                         },
                         new
                         {
                             Id = 3L,
+                            Manager = "mark",
                             Name = "Papa John's",
-                            UserId = 3L,
                             location = "456 DeF, Arlington Tx"
                         });
                 });
@@ -449,6 +395,12 @@ namespace PizzaBox.ORMData.Migrations
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
                 {
+                    b.HasOne("PizzaBox.Domain.Models.Store", "Store")
+                        .WithMany()
+                        .HasForeignKey("StoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PizzaBox.Domain.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -469,21 +421,10 @@ namespace PizzaBox.ORMData.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("PizzaBox.Domain.Models.PizzaSize", b =>
-                {
-                    b.HasOne("PizzaBox.Domain.Models.Pizza", "Pizza")
-                        .WithMany("PizzaSizes")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PizzaBox.Domain.Models.Size", "Size")
-                        .WithMany("PizzaSizes")
-                        .HasForeignKey("SizeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("PizzaBox.Domain.Models.Size", null)
+                        .WithMany("PizzaOrder")
+                        .HasForeignKey("SizeId");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.PizzaStore", b =>
@@ -497,15 +438,6 @@ namespace PizzaBox.ORMData.Migrations
                     b.HasOne("PizzaBox.Domain.Models.Store", "Store")
                         .WithMany("PizzaStore")
                         .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("PizzaBox.Domain.Models.Store", b =>
-                {
-                    b.HasOne("PizzaBox.Domain.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

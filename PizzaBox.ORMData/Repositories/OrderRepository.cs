@@ -18,21 +18,16 @@ namespace PizzaBox.ORMData.Repositories
 
     public Order Get(long id)
     {
-      return _db.Orders.SingleOrDefault(p => p.orderId == id);
+      return _db.Orders.SingleOrDefault(p => p.OrderId == id);
     }
 
     #region Add order
-    public bool Put(Order order)
+    public bool Post(Order order)
     {
       //_db.Add(po);
       _db.Orders.Add(order);
       return _db.SaveChanges() == 1;
     }
     #endregion
-
-    // public List<Pizza> GetPizzaInfo(long pizzaId)
-    // {
-    //     return _pr.Get(pizzaId);
-    // }
   }
 }
