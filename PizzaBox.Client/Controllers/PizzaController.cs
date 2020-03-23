@@ -57,10 +57,10 @@ namespace PizzaBox.Client.Controllers
       
       decimal total;
       total = System.Convert.ToDecimal(id);
-      // long Id = System.Convert.ToInt32(TempData["userid"].ToString());
+      long userId = System.Convert.ToInt64(TempData["userid"]);
     
       Order order = new Order();
-      order.UserId = 2;
+      order.UserId = userId;
       order.StoreId = 3;
       order.totPrice = total;
 
