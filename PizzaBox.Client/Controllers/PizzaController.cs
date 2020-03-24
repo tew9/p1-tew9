@@ -71,8 +71,7 @@ namespace PizzaBox.Client.Controllers
       decimal total;
       total = System.Convert.ToDecimal(id);
       long userId = System.Convert.ToInt64(TempData["userid"]);
-      // long storeId = System.Convert.ToInt64(TempData["storeid"]);
-      // long s_Id = System.Convert.ToInt64(storeId);
+     
       if(TempData["userid"] == null)
       {
         return View("OrderDetails");
@@ -94,7 +93,6 @@ namespace PizzaBox.Client.Controllers
         var save = _db.SaveChanges() == 1;
       }
       _selection.Clear();
-      _selection = new List<PizzaViewModel>();
       foreach(var sel in _selection)
       {
         _selection.Remove(sel);
