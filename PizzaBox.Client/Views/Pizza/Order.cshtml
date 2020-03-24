@@ -21,16 +21,9 @@
       <select asp-for="@Model.SelectedPizza" class="custom-select">
         @foreach (var pizza in @Model.Pizzas)
         {
-          <option value="@pizza.Name" selected><strong>@pizza.Name</strong></option>
+          <option value="@pizza.Name" selected><strong>@pizza.Name : $@pizza.Price</strong></option>
         }
       </select><br><br>
-
-      @* <select asp-for="@Model.SelectedSize"  class="custom-select">
-        @foreach (var size in @Model.Sizes)
-        {
-          <option value="@size.Name" selected>@size.Name : $@size.Price</option>
-        }
-      </select> *@
 
       <input type="hidden" asp-for="@Model.Price" value="@price">
       Quantity: <input type="number" placeholder = "1" min = "1" max="50" title="You can't order more than 250" asp-for="@Model.Quantity"/>

@@ -1,4 +1,4 @@
-@model List<PizzaViewModel>
+@model HistoryViewModel
 
 @{
   Layout = "_LogedLayout";
@@ -15,18 +15,34 @@
     <thead class = "table-dark">
       <tr>
         <th scope="col">No:</th>
-        <th scope="col">Pizza Name</th>
-        <th scope="col">Pizza Size</th>
-        <th scope="col">Quantity</th>
-        <th scope="col">Price</th>
+        <th scope="col">OderId</th>
+        <th scope="col">OrderDate</th>
+        <th scope="col">StoreId</th>
+        <th scope="col">totprice</th>
+        <th scope="col">Pizzas</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
+        <th scope="row"></th>
         <td>dummy</td>
         <td>dummy</td>
         <td>dummy3</td>
+        <td>$0.00</td>
+        <td>
+          <table>
+            <thead class = "table-dark">
+              <tr>
+                <th scope="col">Pizza Names</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+          </table>
+        </td>
       </tr>
     </tbody>
     @* <tfoot>

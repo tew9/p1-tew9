@@ -12,10 +12,10 @@
     <form action="/pizza/order/@Model.Id" method="Get"> 
       @foreach(var store in @Model.Stores)
       {
-        <label class="btn " style="background-color: orange;">
+        <label class="btn " style="background-color: purple; color:white">
         <input type="radio" name="Id" Value=@store.Id />@store.Name</label><br><br>
       }
-      <a href="/history/orderhistory" class="btn float-right " style="font-size:28px;color:blue">Order History</a><br>
-      <button class="btn btn-success" type="submit" style="font-size:28px; color:purple">Go to Order</button>
+      <a href="/history/orderhistory" class="btn float-right " style="font-size:28px;background-color:blue">Order History</a><br>
+      <button class="btn btn-success" type="submit" style="font-size:28px; background-color:purple; color:white">Go to Order</button>
     </form>  
 </div> 

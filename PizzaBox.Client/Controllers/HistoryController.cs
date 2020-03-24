@@ -10,8 +10,8 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult OrderHistory()
     { 
-      
-      return View("History");
+
+      return View("History", new HistoryViewModel());
     }
   }
 }

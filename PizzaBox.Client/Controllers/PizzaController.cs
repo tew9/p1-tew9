@@ -97,7 +97,9 @@ namespace PizzaBox.Client.Controllers
       {
         _selection.Remove(sel);
       }
-       return View("OrderDetails", _selection);
+
+      var hr = _or.Get();
+       return View("History", hr);
     }
   }
 }

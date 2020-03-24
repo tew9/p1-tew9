@@ -1,19 +1,21 @@
+@model PizzaBox.Client.Models.UserModel
 @{
-  Layout = "_Layout";
+  Layout = "_LogedLayout";
+  ViewData["log"] = "Logout";
+  @* ViewData["user"] = @Model.UserName; *@
+} 
 
-}
-
-
-<div class="container-full-bg">
-    <div class="jumbotron">
-        <div class="container">
-            <a href="/account/logout">logout</a>
-            <h1 class="display-4">Welcome @Model.UserName</h1>
-            <p class="lead">Welcome To Store</p>
-            <hr class="my-4">
-            <a href="order/history">Inventory</a>
-            <a href="/store/add">Add Stocks</a>
-            @Html.ActionLink("Add Stocks", "add", "store");
-            </div>
-        </div>
-</div>
+<div class="container subpage">
+  <div class="title">
+    <p>Welcome @TempData["username"].ToString().ToUpper() Choose your store</p> 
+  </div>  
+    <form action="/pizza/order/@Model.Id" method="Get"> 
+      @foreach(var store in @Model.Stores)
+      {
+        <label class="btn " style="background-color: orange;">
+        <input type="radio" name="Id" Value=@store.Id />@store.Name</label><br><br>
+      }
+      <a href="/history/orderhistory" class="btn float-right " style="font-size:28px;color:blue">Order History</a><br>
+      <button class="btn btn-success" type="submit" style="font-size:28px; color:purple">Go to Order</button>
+    </form>  
+</div> 
