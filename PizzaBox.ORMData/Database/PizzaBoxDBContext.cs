@@ -15,7 +15,7 @@ namespace PizzaBox.ORMData.Database
 
         public DbSet<Order> Orders { get; set; }
 
-        public DbSet<Size> Sizes { get; set; }
+        // public DbSet<Size> Sizes { get; set; }
 
         //establish the connection
         #region Connection.
@@ -31,7 +31,7 @@ namespace PizzaBox.ORMData.Database
             //setup mapping keys, keys that will be used to uniqely map c# object to the correct db table and viceversa
             builder.Entity<User>().HasKey( user => user.Id);
             builder.Entity<Order>().HasKey( order => order.OrderId);
-            builder.Entity<Size>().HasKey( size => size.Id);
+            // builder.Entity<Size>().HasKey( size => size.Id);
             builder.Entity<Pizza>().HasKey( pizza => pizza.Id);
             builder.Entity<Store>().HasKey( store => store.Id);
             builder.Entity<PizzaOrder>().HasKey(po => new {po.OrderId, po.Id});
@@ -85,22 +85,23 @@ namespace PizzaBox.ORMData.Database
 
             builder.Entity<Pizza>().HasData(new Pizza[]
             {
-                new Pizza(){Id = 5, Name = "Chicago Deep Dish"},
-                new Pizza(){Id = 7, Name = "Vegie Pizza"},
-                new Pizza(){Id =2, Name = "Chickens Pizza"},
-                new Pizza(){Id = 3, Name = "Pepperoni"},
-                new Pizza(){Id = 4, Name = "Cheese Pizza"},
-                new Pizza(){Id = 1, Name = "The Original Neapolitan"},
-                new Pizza(){Id = 6, Name = "California Style"}
+                new Pizza(){Id = 5, Name = "Chicago Deep Dish", Price = 18.50M},
+                new Pizza(){Id = 7, Name = "Vegie Pizza", Price = 13.5M},
+                new Pizza(){Id =2, Name = "Chickens Pizza", Price = 14.00M},
+                new Pizza(){Id = 3, Name = "Pepperoni", Price = 12.00M},
+                new Pizza(){Id = 4, Name = "Cheese Pizza", Price = 12.25M},
+                new Pizza(){Id = 1, Name = "The Original Neapolitan", Price = 16.25M},
+                new Pizza(){Id = 6, Name = "California Style", Price = 15.50M}
                
             });
 
-            builder.Entity<Size>().HasData(new Size[]
-            {
-                new Size(){Id = 1, Name = "Large", Price = 13.75M},
-                new Size(){Id = 2, Name = "Medium", Price = 10.50M},
-                new Size(){Id = 3, Name = "Small", Price = 8.25M}
-            });
-          }
+        //     builder.Entity<Size>().HasData(new Size[]
+        //     {
+        //         new Size(){Id = 1, Name = "Large", Price = 13.75M},
+        //         new Size(){Id = 2, Name = "Medium", Price = 10.50M},
+        //         new Size(){Id = 3, Name = "Small", Price = 8.25M}
+        //     });
+        //   }
+            }
         }
     }

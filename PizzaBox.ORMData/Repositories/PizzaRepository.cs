@@ -15,14 +15,14 @@ namespace PizzaBox.ORMData.Repositories
       return _db.Pizzas.ToList();
     }
 
-   public List<Size> GetSize(string name)
-    {
-      return _db.Sizes.ToList();
-    }
-    public List<Size> GetSize()
-    {
-      return _db.Sizes.ToList();
-    }
+  //  public List<Size> GetSize(string name)
+  //   {
+  //     return _db.Sizes.ToList();
+  //   }
+    // public List<Size> GetSize()
+    // {
+    //   return _db.Sizes.ToList();
+    // }
 
     public Pizza Get(string name)
     {

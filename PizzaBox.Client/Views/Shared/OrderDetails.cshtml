@@ -16,7 +16,6 @@
       <tr>
         <th scope="col">No:</th>
         <th scope="col">Pizza Name</th>
-        <th scope="col">Pizza Size</th>
         <th scope="col">Quantity</th>
         <th scope="col">Price</th>
       </tr>
@@ -33,25 +32,11 @@
         { 
           if(order.SelectedPizza != null) //to avoid displaying empty fields after delete
           {
-            if(order.SelectedSize.Equals("Large"))
-            {
-              price = 13.50M * order.Quantity;
-              totprice += price;
-            }else if(order.SelectedSize.Equals("Medium"))
-            {
-              price = 10.50M * order.Quantity;
-              totprice += price;
-              
-            }else
-            {
-              price = 8.25M * order.Quantity;
-              totprice += price;
-            }
-
+            price = order.Quantity + order.Price;
+            totprice += price;
               <tr>
               <th scope="row">@idx</th>
               <td>@order.SelectedPizza</td>
-              <td>@order.SelectedSize</td>
               <td>@order.Quantity</td>
               <td>$@price</td>
               <td><a href = "/pizza/orderdetails/@order.Id" class="fa fa-remove" style="font-size:28px;color:red"></a></td>
@@ -64,7 +49,6 @@
     <tfoot>
       <tr>
         <th>Total Price</th>
-        <td></td>
         <td></td>
         <td></td>
         <td>$@totprice</td>

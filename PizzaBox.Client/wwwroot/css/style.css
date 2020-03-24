@@ -258,10 +258,11 @@ input[type=text]:placeholder, input[type=email]:placeholder, input[type=password
 .title
 {
     text-align: center;
-    height: 100px;
+    height: 80px;
     background: -webkit-linear-gradient(left, #0072ff, #8811c5);
     color: #fff;
     font-weight: bold;
+    padding: 2em;
     margin-bottom: 5em;
 }
 

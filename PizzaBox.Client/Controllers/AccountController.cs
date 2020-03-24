@@ -10,17 +10,18 @@ namespace PizzaBox.Client.Controllers
     public class AccountController : Controller
     {
         //creating account object.
-        private readonly UserRepository _ur; 
+        private readonly UserRepository _ur = new UserRepository(); 
+        private static readonly StoreRepository _sr = new StoreRepository();
 
-        public AccountController(UserRepository user_repo)
-        {
-            _ur = user_repo;
-        }
+        // public AccountController(UserRepository user_repo)
+        // {
+        //     _ur = user_repo;
+        // }
 
         [HttpGet]
         public IActionResult Login()
         {
-            return View(new UserModel());
+            return View(new AccountViewModel());
         }
         [HttpGet]
         public IActionResult Register()
@@ -29,22 +30,24 @@ namespace PizzaBox.Client.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(UserModel account)
+        public IActionResult Login(AccountViewModel account)
         {
             User dbuser = _ur.Get(account.UserName);
             
             if(!ModelState.IsValid)
             {
+                ViewData["Error"] = "Wrong Username or Password";
                 return View(account);
             }
             if(account.Login(account.Password, dbuser))
             {   
                 string usertype = dbuser.type;
                 TempData["userid"] = dbuser.Id.ToString();
+                TempData["username"] = account.UserName;
                 if(usertype == "user")
                 {
                     
-                    return View("User", account);
+                    return View("User", new UserModel());
                 }
                          
                 return View("Store", account);
@@ -54,11 +57,6 @@ namespace PizzaBox.Client.Controllers
                 ViewData["Error"] = "Wrong Username or Password";
                 return View(account);
             }  
-        }
-
-        public IActionResult Logout()
-        {
-            return  View();
         }
     }
 }

@@ -13,25 +13,12 @@ namespace PizzaBox.ORMData.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Pizzas", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sizes", x => x.Id);
+                    table.PrimaryKey("PK_Pizzas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,7 +60,6 @@ namespace PizzaBox.ORMData.Migrations
                 {
                     Id = table.Column<long>(nullable: false),
                     StoreId = table.Column<long>(nullable: false),
-                    PizzaStoreId = table.Column<long>(nullable: false),
                     Inventory = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -127,8 +113,7 @@ namespace PizzaBox.ORMData.Migrations
                 {
                     Id = table.Column<long>(nullable: false),
                     OrderId = table.Column<long>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    SizeId = table.Column<long>(nullable: true)
+                    Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -145,36 +130,20 @@ namespace PizzaBox.ORMData.Migrations
                         principalTable: "Orders",
                         principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PizzaOrder_Sizes_SizeId",
-                        column: x => x.SizeId,
-                        principalTable: "Sizes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
                 table: "Pizzas",
-                columns: new[] { "Id", "Name" },
-                values: new object[,]
-                {
-                    { 5L, "Chicago Deep Dish" },
-                    { 7L, "Vegie Pizza" },
-                    { 2L, "Chickens Pizza" },
-                    { 3L, "Pepperoni" },
-                    { 4L, "Cheese Pizza" },
-                    { 1L, "The Original Neapolitan" },
-                    { 6L, "California Style" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Sizes",
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 3L, "Small", 8.25m },
-                    { 2L, "Medium", 10.50m },
-                    { 1L, "Large", 13.75m }
+                    { 5L, "Chicago Deep Dish", 18.50m },
+                    { 7L, "Vegie Pizza", 13.5m },
+                    { 2L, "Chickens Pizza", 14.00m },
+                    { 3L, "Pepperoni", 12.00m },
+                    { 4L, "Cheese Pizza", 12.25m },
+                    { 1L, "The Original Neapolitan", 16.25m },
+                    { 6L, "California Style", 15.50m }
                 });
 
             migrationBuilder.InsertData(
@@ -201,21 +170,21 @@ namespace PizzaBox.ORMData.Migrations
 
             migrationBuilder.InsertData(
                 table: "PizzaStore",
-                columns: new[] { "Id", "StoreId", "Inventory", "PizzaStoreId" },
+                columns: new[] { "Id", "StoreId", "Inventory" },
                 values: new object[,]
                 {
-                    { 1L, 1L, 5, 0L },
-                    { 2L, 1L, 10, 0L },
-                    { 3L, 1L, 20, 0L },
-                    { 4L, 1L, 6, 0L },
-                    { 1L, 2L, 5, 0L },
-                    { 2L, 2L, 10, 0L },
-                    { 3L, 2L, 20, 0L },
-                    { 4L, 2L, 6, 0L },
-                    { 5L, 3L, 6, 0L },
-                    { 6L, 3L, 4, 0L },
-                    { 1L, 3L, 7, 0L },
-                    { 2L, 3L, 6, 0L }
+                    { 1L, 1L, 5 },
+                    { 2L, 1L, 10 },
+                    { 3L, 1L, 20 },
+                    { 4L, 1L, 6 },
+                    { 1L, 2L, 5 },
+                    { 2L, 2L, 10 },
+                    { 3L, 2L, 20 },
+                    { 4L, 2L, 6 },
+                    { 5L, 3L, 6 },
+                    { 6L, 3L, 4 },
+                    { 1L, 3L, 7 },
+                    { 2L, 3L, 6 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -234,11 +203,6 @@ namespace PizzaBox.ORMData.Migrations
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PizzaOrder_SizeId",
-                table: "PizzaOrder",
-                column: "SizeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PizzaStore_StoreId",
                 table: "PizzaStore",
                 column: "StoreId");
@@ -254,9 +218,6 @@ namespace PizzaBox.ORMData.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Sizes");
 
             migrationBuilder.DropTable(
                 name: "Pizzas");

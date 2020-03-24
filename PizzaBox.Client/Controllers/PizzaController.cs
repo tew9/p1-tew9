@@ -4,6 +4,7 @@ using PizzaBox.Client.Models;
 using PizzaBox.Domain.Models;
 using PizzaBox.ORMData.Database;
 using PizzaBox.ORMData.Repositories;
+using System;
 
 namespace PizzaBox.Client.Controllers
 {
@@ -15,24 +16,38 @@ namespace PizzaBox.Client.Controllers
     private static readonly PizzaRepository _pr = new PizzaRepository();
     private static readonly PizzaBoxDBContext _db = new PizzaBoxDBContext();
     
+    public static long storeId;
     [HttpGet]
-    public IActionResult Order()
+    public IActionResult Order(string id)
     { 
-      return View(new PizzaViewModel());
+      // TempData["storeid"] = id.ToString();
+      if(id != null){
+        storeId = Int64.Parse(id);
+      }
+      else
+      {
+        id = storeId.ToString();
+      }
+      return View(new PizzaViewModel(id));
     }
 
     [HttpPost]
     public IActionResult Order(PizzaViewModel model)
     {
       model.Id++;
-      foreach(var m in _selection)
+      if(_selection != null)
       {
-        if(m.SelectedSize.Equals(model.SelectedSize) && m.SelectedPizza.Equals(model.SelectedPizza))
+        foreach(var m in _selection)
         {
-          m.Quantity += model.Quantity;
-          return View("OrderDetails", _selection);
+          if(m.SelectedPizza.Equals(model.SelectedPizza))
+          {
+            m.Quantity += model.Quantity;
+            return View("OrderDetails", _selection);
+          }
         }
       }
+      var p = _pr.Get(model.SelectedPizza);
+      model.Price = p.Price;
       _selection.Add(model);
       return View("OrderDetails", _selection);
     }
@@ -56,21 +71,22 @@ namespace PizzaBox.Client.Controllers
       decimal total;
       total = System.Convert.ToDecimal(id);
       long userId = System.Convert.ToInt64(TempData["userid"]);
+      // long storeId = System.Convert.ToInt64(TempData["storeid"]);
+      // long s_Id = System.Convert.ToInt64(storeId);
       if(TempData["userid"] == null)
       {
         return View("OrderDetails");
       }
       Order order = new Order();
       order.UserId = userId;
-      order.StoreId = 3;
-      order.totPrice = total;
-      long orderId = order.OrderId;      
+      order.StoreId = storeId;
+      order.totPrice = total;   
 
       foreach(var pizza in _selection)
       {
         PizzaOrder po = new PizzaOrder();
         po.Quantity = pizza.Quantity;
-        po.OrderId = orderId;
+        po.OrderId = order.OrderId; 
         Pizza p = _pr.Get(pizza.SelectedPizza);
         po.Id = p.Id;
         order.PizzaOrders.Add(po);

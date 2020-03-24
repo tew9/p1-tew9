@@ -57,6 +57,9 @@ namespace PizzaBox.ORMData.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Pizzas");
@@ -65,37 +68,44 @@ namespace PizzaBox.ORMData.Migrations
                         new
                         {
                             Id = 5L,
-                            Name = "Chicago Deep Dish"
+                            Name = "Chicago Deep Dish",
+                            Price = 18.50m
                         },
                         new
                         {
                             Id = 7L,
-                            Name = "Vegie Pizza"
+                            Name = "Vegie Pizza",
+                            Price = 13.5m
                         },
                         new
                         {
                             Id = 2L,
-                            Name = "Chickens Pizza"
+                            Name = "Chickens Pizza",
+                            Price = 14.00m
                         },
                         new
                         {
                             Id = 3L,
-                            Name = "Pepperoni"
+                            Name = "Pepperoni",
+                            Price = 12.00m
                         },
                         new
                         {
                             Id = 4L,
-                            Name = "Cheese Pizza"
+                            Name = "Cheese Pizza",
+                            Price = 12.25m
                         },
                         new
                         {
                             Id = 1L,
-                            Name = "The Original Neapolitan"
+                            Name = "The Original Neapolitan",
+                            Price = 16.25m
                         },
                         new
                         {
                             Id = 6L,
-                            Name = "California Style"
+                            Name = "California Style",
+                            Price = 15.50m
                         });
                 });
 
@@ -110,14 +120,9 @@ namespace PizzaBox.ORMData.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<long?>("SizeId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("OrderId", "Id");
 
                     b.HasIndex("Id");
-
-                    b.HasIndex("SizeId");
 
                     b.ToTable("PizzaOrder");
                 });
@@ -133,9 +138,6 @@ namespace PizzaBox.ORMData.Migrations
                     b.Property<int>("Inventory")
                         .HasColumnType("int");
 
-                    b.Property<long>("PizzaStoreId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id", "StoreId");
 
                     b.HasIndex("StoreId");
@@ -147,123 +149,73 @@ namespace PizzaBox.ORMData.Migrations
                         {
                             Id = 1L,
                             StoreId = 1L,
-                            Inventory = 5,
-                            PizzaStoreId = 0L
+                            Inventory = 5
                         },
                         new
                         {
                             Id = 2L,
                             StoreId = 1L,
-                            Inventory = 10,
-                            PizzaStoreId = 0L
+                            Inventory = 10
                         },
                         new
                         {
                             Id = 3L,
                             StoreId = 1L,
-                            Inventory = 20,
-                            PizzaStoreId = 0L
+                            Inventory = 20
                         },
                         new
                         {
                             Id = 4L,
                             StoreId = 1L,
-                            Inventory = 6,
-                            PizzaStoreId = 0L
+                            Inventory = 6
                         },
                         new
                         {
                             Id = 1L,
                             StoreId = 2L,
-                            Inventory = 5,
-                            PizzaStoreId = 0L
+                            Inventory = 5
                         },
                         new
                         {
                             Id = 2L,
                             StoreId = 2L,
-                            Inventory = 10,
-                            PizzaStoreId = 0L
+                            Inventory = 10
                         },
                         new
                         {
                             Id = 3L,
                             StoreId = 2L,
-                            Inventory = 20,
-                            PizzaStoreId = 0L
+                            Inventory = 20
                         },
                         new
                         {
                             Id = 4L,
                             StoreId = 2L,
-                            Inventory = 6,
-                            PizzaStoreId = 0L
+                            Inventory = 6
                         },
                         new
                         {
                             Id = 5L,
                             StoreId = 3L,
-                            Inventory = 6,
-                            PizzaStoreId = 0L
+                            Inventory = 6
                         },
                         new
                         {
                             Id = 6L,
                             StoreId = 3L,
-                            Inventory = 4,
-                            PizzaStoreId = 0L
+                            Inventory = 4
                         },
                         new
                         {
                             Id = 1L,
                             StoreId = 3L,
-                            Inventory = 7,
-                            PizzaStoreId = 0L
+                            Inventory = 7
                         },
                         new
                         {
                             Id = 2L,
                             StoreId = 3L,
-                            Inventory = 6,
-                            PizzaStoreId = 0L
-                        });
-                });
-
-            modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Sizes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Name = "Large",
-                            Price = 13.75m
-                        },
-                        new
-                        {
-                            Id = 2L,
-                            Name = "Medium",
-                            Price = 10.50m
-                        },
-                        new
-                        {
-                            Id = 3L,
-                            Name = "Small",
-                            Price = 8.25m
+                            Inventory = 6
                         });
                 });
 
@@ -421,10 +373,6 @@ namespace PizzaBox.ORMData.Migrations
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("PizzaBox.Domain.Models.Size", null)
-                        .WithMany("PizzaOrder")
-                        .HasForeignKey("SizeId");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.PizzaStore", b =>
