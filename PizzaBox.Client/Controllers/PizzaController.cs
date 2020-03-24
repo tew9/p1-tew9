@@ -99,7 +99,7 @@ namespace PizzaBox.Client.Controllers
       }
 
       var hr = _or.Get();
-       return View("History", hr);
+       return View("OrderDetails", _selection);
     }
   }
 }
