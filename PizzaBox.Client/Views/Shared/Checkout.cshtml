@@ -1,0 +1,24 @@
+
+
+@{
+  Layout = "_LogedLayout";
+  ViewData["log"] = "Logout";
+} 
+
+
+<div class="container subpage">
+  
+  <div class="title">
+    <p>Thank you for ordering from us today, you can order again here in 24 hours</p>
+  </div>
+  <div class="table">
+    <p class = "table-dark">
+      @TempData["checkout"]
+    </p>
+   <br><br>  
+  <div><a href = "/history/orderhistory/" style="font-size:28px;color:red">View you History</a></div>
+  <div style="padding: 3em;">
+    <a class = "btn float-right btn-success" href = "/account/Login" style="width:100%" type="submit" value="checkout">Done!</a>
+  </div>
+</div>
+

@@ -11,11 +11,11 @@ namespace PizzaBox.Client.Controllers
   public class PizzaController : Controller
   {
 
-    private static List<PizzaViewModel> _selection = new List<PizzaViewModel>();
+    private static readonly List<PizzaViewModel> _selection = new List<PizzaViewModel>();
     private static readonly OrderRepository _or = new OrderRepository();
     private static readonly PizzaRepository _pr = new PizzaRepository();
     private static readonly PizzaBoxDBContext _db = new PizzaBoxDBContext();
-    
+
     public static long storeId;
     [HttpGet]
     public IActionResult Order(string id)
@@ -53,13 +53,14 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpGet]
-    public IActionResult OrderDetails(int Id)
+    public IActionResult OrderDetails(string id)
     {
+      var Id = Int16.Parse(id);
       if(Id >= 0){
         _selection.RemoveAt(Id);
       }else
       {
-        _selection.RemoveAt(0);
+        _selection.RemoveAt(Id+1);
       }
       
       return View("OrderDetails", _selection);
@@ -93,13 +94,14 @@ namespace PizzaBox.Client.Controllers
         var save = _db.SaveChanges() == 1;
       }
       _selection.Clear();
+      new PizzaController();
       foreach(var sel in _selection)
       {
         _selection.Remove(sel);
       }
-
-      var hr = _or.Get();
-       return View("OrderDetails", _selection);
+      
+      TempData["checkout"] = "Your Order was succesful";
+       return View("Checkout");
     }
   }
 }

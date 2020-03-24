@@ -11,8 +11,8 @@
     <!-- Login Form -->
     <form action="/account/login" method="POST">
     @Html.AntiForgeryToken()
-      <input type="text" id="username" class="fadeIn second" asp-for="@Model.UserName" placeholder="username" required>
-      <input type="password" id="password" class="fadeIn third" asp-for="@Model.Password" placeholder="password" required>
+      <input type="text" id="username" class="fadeIn second" asp-for="@Model.UserName" placeholder="username" required title="please enter your username">
+      <input type="password" id="password" class="fadeIn third" asp-for="@Model.Password" placeholder="password" required title="password cannot be empty">
      
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>

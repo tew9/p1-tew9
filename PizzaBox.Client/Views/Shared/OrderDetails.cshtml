@@ -32,7 +32,7 @@
         { 
           if(order.SelectedPizza != null) //to avoid displaying empty fields after delete
           {
-            price = order.Quantity + order.Price;
+            price = order.Quantity * order.Price;
             totprice += price;
               <tr>
               <th scope="row">@idx</th>
