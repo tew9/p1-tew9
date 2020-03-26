@@ -50,7 +50,7 @@ namespace PizzaBox.Client.Controllers
                     return View("User", new UserModel());
                 }
                          
-                return View("Store", account);
+                return View("Store", new UserModel());
             }
             else
             {

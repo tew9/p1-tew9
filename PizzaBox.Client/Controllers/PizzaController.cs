@@ -60,7 +60,7 @@ namespace PizzaBox.Client.Controllers
         _selection.RemoveAt(Id);
       }else
       {
-        _selection.RemoveAt(Id+1);
+        _selection.Clear();
       }
       
       return View("OrderDetails", _selection);
@@ -90,10 +90,11 @@ namespace PizzaBox.Client.Controllers
         Pizza p = _pr.Get(pizza.SelectedPizza);
         po.Id = p.Id;
         order.PizzaOrders.Add(po);
-        _db.Orders.Add(order);
-        var save = _db.SaveChanges() == 1;
       }
+      _db.Orders.Add(order);
+      var save = _db.SaveChanges() == 1;
       _selection.Clear();
+      
       new PizzaController();
       foreach(var sel in _selection)
       {

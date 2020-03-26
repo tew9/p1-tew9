@@ -60,7 +60,7 @@ namespace PizzaBox.Client.Models
         public AccountViewModel()
         {
           Id = DateTime.Now.Ticks;
-          ListOfStores = _sr.Get();
+        //   ListOfStores = _sr.Get();
         }
     }
 }

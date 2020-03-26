@@ -14,10 +14,10 @@ namespace PizzaBox.Client.Models
 
     public List<Pizza> Pizzas { get; set; }
   
-    public int OrderId {get; set;}
+    public string OrderId {get; set;}
     public decimal Price { get; set; }
     // public decimal TotPrice { get; set; }
-    public int storeId { get; set; }
+    public string storeName { get; set; }
     
     public HistoryViewModel(){}
     public HistoryViewModel(string id)

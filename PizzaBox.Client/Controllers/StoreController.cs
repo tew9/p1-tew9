@@ -6,7 +6,7 @@ namespace PizzaBox.Client.Controllers
   public class StoreController : Controller
   {
     [HttpGet]
-    public IActionResult Add()
+    public IActionResult add()
     { 
       return View();
     }
