@@ -22,23 +22,23 @@ stages:
           - script: dotnet test --collect:"XPlat Code Coverage"
             workingDirectory: $(working_dir)
 
-  - stage: analyze
-    jobs:
-      - job:
-        pool:
-          vmImage: ubuntu-18.04
-        steps:
-          - task: DotnetGlobalToolInstaller@0
-            inputs:
-              name: "dotnet-sonarscanner"
-          - script: |
-              dotnet sonarscanner begin /k:"p1-tew9" /o:"p1-tew9" /d:sonar.login="$SONAR_LOGIN" /d:sonar.host.url=https://sonarcloud.io
-              dotnet build
-              dotnet test --collect:"XPlat Code Coverage"
-              dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
-            workingDirectory: $(working_dir)
-            env:
-              SONAR_LOGIN: $(sonar_login)
+  # - stage: analyze
+  #   jobs:
+  #     - job:
+  #       pool:
+  #         vmImage: ubuntu-18.04
+  #       steps:
+  #         - task: DotnetGlobalToolInstaller@0
+  #           inputs:
+  #             name: "dotnet-sonarscanner"
+  #         - script: |
+  #             dotnet sonarscanner begin /k:"p1-tew9" /o:"p1-tew9" /d:sonar.login="$SONAR_LOGIN" /d:sonar.host.url=https://sonarcloud.io
+  #             dotnet build
+  #             dotnet test --collect:"XPlat Code Coverage"
+  #             dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
+  #           workingDirectory: $(working_dir)
+  #           env:
+  #             SONAR_LOGIN: $(sonar_login)
 
   - stage: pack
     jobs:
@@ -83,4 +83,4 @@ variables:
   - name: image_name
     value: tangotew/p1-project
   - name: working_dir
-    value: $(System.DefaultWorkingDirectory)/p1-tew9
+    value: $(System.DefaultWorkingDirectory)
