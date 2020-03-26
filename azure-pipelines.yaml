@@ -83,4 +83,4 @@ variables:
   - name: image_name
     value: tangotew/p1-project
   - name: working_dir
-    value: $(System.DefaultWorkingDirectory)/p1-tew9
+    value: $(System.DefaultWorkingDirectory)
