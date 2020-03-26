@@ -11,23 +11,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet build
-            # workingDirectory: $(System.DefaultWorkingDirectory)/p1-tew9
-
-stages:
-- stage: analyze
-  jobs:
-    - job:
-      pool:
-        vmImage: ubuntu-18.04
-      steps:
-        task:
-
-        - script: |
-            <SSonarScanner.MSBuild.exe begin /k:"tew9" /o:"<tew9>" /d:sonar.login="<token>" 
-            dotnet build
-            SonarScanner.MSBuild.exe end /d:sonar.login="<token>" 
-          env: 
-            SONAR_LOGIN: $(sonar_login)
+            workingDirectory: $(working_dir)
 
   - stage: test
     jobs:
@@ -36,31 +20,66 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet test --collect:"XPlat Code Coverage"
-            # workingDirectory: ./p1-tew9
+            workingDirectory: $(working_dir)
 
+  - stage: analyze
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - task: DotnetGlobalToolInstaller@0
+            inputs:
+              name: "dotnet-sonarscanner"
+          - script: |
+              dotnet sonarscanner begin /k:"2002-24-dotnet_training-code" /o:"2002-24-dotnet" /d:sonar.login="$SONAR_LOGIN" /d:sonar.host.url=https://sonarcloud.io
+              dotnet build
+              dotnet test --collect:"XPlat Code Coverage"
+              dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
+            workingDirectory: $(working_dir)
+            env:
+              SONAR_LOGIN: $(sonar_login)
   - stage: pack
     jobs:
       - job:
         pool:
           vmImage: ubuntu-18.04
         steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: "docker"
+              command: "login"
           - script: |
-              docker login
-              docker image build -f dockerfile -t tangotew/p1-project .
-              docker image push tangotew/p1-project
-              docker logout
+              docker image build -f dockerfile -t $DOCKER_IMAGE .
+              docker image push $DOCKER_IMAGE
+            workingDirectory: $(working_dir)
             env:
               DOCKER_IMAGE: $(image_name)
-            # workingDirectory: ./p1-tew9
+          - task: Docker@2
+            inputs:
+              containerRegistry: "docker"
+              command: "logout"
+
+  - stage: deploy
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: "AzureRM"
+              azureSubscription: "tangotew(560df603-82d8-4415-93a1-c821e91a310d)"
+              appType: "webAppContainer"
+              WebAppName: "p1proj"
+              DockerNamespace: "tangotew"
+              DockerRepository: "p1-project"
+
 trigger:
-  - frontend
+  - master
 
-variable:
-  - image_name: tangotew/p1-project
-    # © 2020 GitHub, Inc.
-    # Terms
-    # Privacy
-    # Security
-    # Status
-    # Help
-
+variables:
+  - name: image_name
+    value: tangotew/p1-project
+  - name: working_dir
+    value: $(System.DefaultWorkingDirectory)/p1-project
