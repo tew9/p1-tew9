@@ -69,7 +69,7 @@ stages:
           - task: AzureRmWebAppDeployment@4
             inputs:
               ConnectionType: "AzureRM"
-              azureSubscription: "tangotew(560df603-82d8-4415-93a1-c821e91a310d)"
+              azureSubscription: "tangotew(azure subscription 1)"
               appType: "webAppContainer"
               WebAppName: "p1proj"
               DockerNamespace: "tangotew"
